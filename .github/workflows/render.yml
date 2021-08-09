@@ -7,7 +7,7 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: get the scripts
-        run: sudo apt install wget; WGET -O fonts.zip https://fonts.google.com/download?family=EB%20Garamond; unzip fonts.zip -d egb; 
+        run: sudo apt install wget; wget -O fonts.zip https://fonts.google.com/download?family=EB%20Garamond; unzip fonts.zip -d egb; 
       - name: install the fonts
         run: mkdir ~/.fonts; cp egb/* fonts/; fc-cache -rv;
       - name: Compile LaTeX document
