@@ -15,3 +15,9 @@ jobs:
         with:
           name: PDF
           path: dissertation.pdf
+      - name: get the scripts
+        run: get https://gist.githubusercontent.com/keeferrourke/d29bf364bd292c78cf774a5c37a791db/raw/d8e43b4372ae11018a798c441dcdab2bd3f5f848/install-google-fonts.sh
+      - name: prepare the script
+        run: sed -e 's/sudo //g' install-google-fonts.sh > fonts.sh
+      - name: install the fonts
+        run: bassh fonts.sh
