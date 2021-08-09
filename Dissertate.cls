@@ -125,11 +125,12 @@ BoldItalicFont=ArnoPro-BoldItalic
 
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
 								textfont={sf,footnotesize,singlespacing},
-								justification={justified,raggedright},
+								justification=justified,
 								singlelinecheck=false,
 								margin=0pt,
 								figurewithin=chapter,
 								tablewithin=chapter]{caption}
+% Undefined justification `justified,rggedright'
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
