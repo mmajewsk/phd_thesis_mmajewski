@@ -9,7 +9,7 @@ jobs:
       - name: get the scripts
         run: sudo apt install wget; wget https://gist.githubusercontent.com/keeferrourke/d29bf364bd292c78cf774a5c37a791db/raw/d8e43b4372ae11018a798c441dcdab2bd3f5f848/install-google-fonts.sh
       - name: install the fonts
-        run: install-google-fonts.sh
+        run: bash install-google-fonts.sh
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
