@@ -44,6 +44,8 @@
     "tocloft"
     "ragged2e"
     "mathspec"
+    "xltxtra"
+    "xunicode"
     "caption")
    (TeX-add-symbols
     '("newthought" 1)
