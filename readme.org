@@ -1,0 +1,19 @@
+* Running this thesis
+requires installing this font
+https://fonts.google.com/specimen/EB+Garamond
+and also running it with xelatex
+
+
+* Backlog
+** TODO get arxiv access
+* Doing
+** TODO Change the title of the thesis
+*** TODO read about what LARTPC and the dataset is
+- https://hep.yale.edu/yale-henp/lartpc official website
+- the data website http://deeplearnphysics.org/DataChallenge/
+*** TODO make a new name
+* Done
+* Notes:
+** Titles:
+- Zastosowanie metod uczenia maszynowego do analizy danych kalibracyjnych detektora LHCb VELO, badania właściwości naświetlonych sensorów pikselowych oraz rekonstrukcji przypadków rozproszeń neutrin w e LArTPC
+- Application of machine learning methods for analisys of the calibration of the LHCb VELO detector, studies of irradiate silicon pixel sensors and reconstrucion of the neutrino decays in LARTPC detector
