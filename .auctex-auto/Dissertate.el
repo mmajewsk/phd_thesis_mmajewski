@@ -39,6 +39,7 @@
     "booktabs"
     "units"
     "verbatim"
+    "afterpage"
     "url"
     "tocloft"
     "ragged2e"
@@ -46,6 +47,7 @@
     "caption")
    (TeX-add-symbols
     '("newthought" 1)
+    "blankpage"
     "degreeyear"
     "degreemonth"
     "degree"
