@@ -9,7 +9,7 @@ jobs:
       - name: get the scripts
         run: sudo apt install wget; wget -O fonts.zip https://fonts.google.com/download?family=EB%20Garamond; unzip fonts.zip -d egb; 
       - name: install the fonts
-        run: mkdir ~/.fonts; cp egb/* fonts/; fc-cache -rv;
+        run: mkdir ~/.fonts; cp -r egb/* fonts/; fc-cache -rv;
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
