@@ -13,8 +13,7 @@
 \RequirePackage[centertags]{amsmath}
 \RequirePackage{amssymb}
 \ProvidesClass{Dissertate}[2014/01/24 v1.0 Dissertate Class]
-% \LoadClass[12pt, oneside, letterpaper]{book}
-\LoadClass[12pt, a4paper, openany]{book}
+\LoadClass[12pt, oneside, letterpaper]{book}
 
 % some definitions
 \def\degreeyear#1{\gdef\@degreeyear{#1}}
@@ -41,6 +40,7 @@
 \usepackage{hyperref}
 \RequirePackage[tiny, md, sc]{titlesec}
 \setlength{\headheight}{15pt}
+\pagestyle{plain}
 \RequirePackage{titling}
 \RequirePackage[palatino]{quotchap}
 
@@ -54,22 +54,16 @@
 \RequirePackage{lettrine}
 \RequirePackage[super,comma,numbers]{natbib}
 \renewcommand{\bibnumfmt}[1]{[#1]}
-% \RequirePackage[width=5.75in, letterpaper]{geometry}
-\RequirePackage[lmargin=3.5cm, rmargin=1.5cm, height=10.0in, a4paper]{geometry}
+\RequirePackage[width=5.75in, letterpaper]{geometry}
 \RequirePackage{fancyhdr}
-\pagestyle{fancy}
 
 \usepackage[titletoc]{appendix}
 \renewcommand{\setthesection}{\arabic{chapter}.A\arabic{section}}
-
-\RequirePackage{bm}
-\RequirePackage{upgreek}
 
 \RequirePackage{setspace}
 \RequirePackage{booktabs}
 \RequirePackage[tight,nice]{units}
 \RequirePackage{verbatim}
-\RequirePackage{afterpage}
 \setcounter{tocdepth}{1}
 
 \RequirePackage{url}
@@ -94,7 +88,7 @@
 
 \defaultfontfeatures{Mapping=tex-text}
 \newfontfamily{\smallcaps}[RawFeature={+c2sc,+scmp}]{EB Garamond}
-\setromanfont[Numbers=Proportional, Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
+\setromanfont[Numbers=OldStyle, Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
 \setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}
 \setmonofont[Scale=MatchLowercase]{Noto Mono} % Font substitution for Source Code Pro
 
@@ -117,111 +111,6 @@
    \noindent\textsc{#1}%
 }
 
-\renewcommand{\abstractpage}{
-	\newpage
-	\pagenumbering{roman}
-	\setcounter{page}{6}
-	\pagestyle{fancy}
-	\lhead{Thesis advisor: \@advisor} \rhead{\@author}
-	\renewcommand{\headrulewidth}{0.0pt}
-	\begin{center}
-	\vspace*{1pt}
-	\Large \textcolor{SchoolColor}{\textit{Machine learning based long-lived particle reconstruction algorithm for Run 2 and upgrade LHCb trigger and a flexible software platform for the UT detector read-out chip emulation }} \normalsize\\
-	\vspace*{15pt}
-	\sc Streszczenie \\ \rm
-	\end{center}
-	\doublespace %Harvard registrar requests that abstract is double spaced
-	\input{frontmatter/abstract}
-	\doublespace %Harvard registrar requests that abstract is double spaced
-	\newpage \lhead{} \rhead{}
-	\cfoot{\thepage}
-	\onehalfspacing
-}
-
-\renewcommand{\dedicationpage}{
-	\pagenumbering{roman}
-	\setcounter{page}{5}
-	\pagestyle{fancy}
-	\newpage \thispagestyle{fancy} \vspace*{\fill}
-	\sc \noindent \input{frontmatter/dedication}
-	\vspace*{\fill} \newpage \rm
-	}
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage}
-
-\renewcommand{\maketitle}{
-\newgeometry{hmargin={2cm, 2cm}, height=10.0in}     % use whatever margins you want for left, right, top and bottom.
-
-\thispagestyle{empty}
-%% ------------------------ NAGLOWEK STRONY ---------------------------------
-\includegraphics[height=37.5mm]{figures/agh_nzw_a_en_1w_wbr_rgb_150ppi.jpg}\\
-\rule{23.3mm}{0pt}
-{\large \bf \sf Faculty of Physics and Applied Computer Science}\\
-\rule{\textwidth}{3pt}\\
-\rule[2ex]
-{\textwidth}{1pt}\\
-\vspace{7ex}
-\begin{center}
-	{\LARGE \bf Doctoral thesis}\\
-	\vspace{13ex}
-	% --------------------------- IMIE I NAZWISKO -------------------------------
-	{\bf \Large Adam Dendek}\\
-	\vspace{3ex}
-	{\small \mbox{}}\\
-	\vspace{1.5ex}
-	{\small \mbox{}}\\
-	%\vspace{10ex}
-	%% ------------------------ TYTUL PRACY --------------------------------------
-	{\bf \LARGE Machine learning based long-lived particle reconstruction algorithm for Run 2 and upgrade LHCb trigger}\\
-	\vspace{6pt}
-	{\bf \LARGE and a flexible software platform for the UT detector read-out chip emulation}\\
-	\vspace{6pt}
-\end{center}
-\vspace{14ex}
-%% ------------------------ PROMOTOR PRACY ------------------------------------
-{\centering
-	\begin{tabbing}
-		{\large Supervisor: }{\large\bf dr hab. inż. Tomasz Szumlak}\\[2pt]
-	\end{tabbing}
-}
-
-\begin{center}
-\vspace*{12ex} {\sf \large \bf Cracow, January 2021}
-\end{center}
-%% =====  STRONA TYTULOWA PRACY doktorskiej====
-\afterpage{\blankpage}
-\newpage
-\thispagestyle{empty}
-\newpage
-% @TODO
-
-%% =====  TYL STRONY TYTULOWEJ PRACY DOKTORSKIEJ====
-\thispagestyle{empty}
-
-\vspace*{4ex}\noindent {\textbf{Declaration of the author of this dissertation:}}\\[2pt]
-Aware of legal responsibility for making untrue statements I
-hereby declare that I have written this dissertation myself and
-all the contents of the dissertation
-have been obtained by legal means.\\[8pt]
-
-\vspace*{4ex}
-
-
-
-\noindent {\textbf{Declaration of the  thesis
-		Supervisor:}}\\[2pt]
-This dissertation is ready to be reviewed.
-\\[8pt]
-\newpage
-\thispagestyle{empty}
-\ % The empty page
-
-\newpage
-\restoregeometry
-}
 % Align reference numbers so that they do not cause an indent
 \newlength\mybibindent
 \setlength\mybibindent{0pt}

@@ -1,10 +1,10 @@
 (TeX-add-style-hook
- "Dissertate"
+ "harvard-thesis"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
-                     '(("book" "12pt" "a4paper" "openany")))
+                     '(("book" "12pt" "oneside" "letterpaper")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("amsmath" "centertags") ("titlesec" "tiny" "md" "sc") ("quotchap" "palatino") ("natbib" "super" "comma" "numbers") ("geometry" "lmargin=3.5cm" "rmargin=1.5cm" "height=10.0in" "a4paper") ("appendix" "titletoc") ("units" "tight" "nice") ("tocloft" "titles") ("caption" "labelfont={bf,sf,footnotesize,singlespacing}" "								textfont={sf,footnotesize,singlespacing}" "								justification={justified,RaggedRight}" "								singlelinecheck=false" "								margin=0pt" "								figurewithin=chapter" "								tablewithin=chapter")))
+                     '(("amsmath" "centertags") ("titlesec" "tiny" "md" "sc") ("quotchap" "palatino") ("natbib" "super" "comma" "numbers") ("geometry" "width=5.75in" "letterpaper") ("appendix" "titletoc") ("units" "tight" "nice") ("tocloft" "titles") ("caption" "labelfont={bf,sf,footnotesize,singlespacing}" "								textfont={sf,footnotesize,singlespacing}" "								justification={justified,RaggedRight}" "								singlelinecheck=false" "								margin=0pt" "								figurewithin=chapter" "								tablewithin=chapter")))
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
@@ -15,8 +15,6 @@
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
-    "frontmatter/abstract"
-    "frontmatter/dedication"
     "amsmath"
     "amssymb"
     "book"
@@ -33,8 +31,6 @@
     "geometry"
     "fancyhdr"
     "appendix"
-    "bm"
-    "upgreek"
     "setspace"
     "booktabs"
     "units"
