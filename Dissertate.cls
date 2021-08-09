@@ -83,7 +83,7 @@
 \renewcommand\listfigurename{Listing of figures}
 
 \onehalfspacing
-%\raggedright
+\raggedright
 \parindent 12pt
 \RequirePackage{mathspec}
 
@@ -125,7 +125,7 @@ BoldItalicFont=ArnoPro-BoldItalic
 
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
 								textfont={sf,footnotesize,singlespacing},
-								justification={justified,RaggedRight},
+								justification={justified,rggedright},
 								singlelinecheck=false,
 								margin=0pt,
 								figurewithin=chapter,
