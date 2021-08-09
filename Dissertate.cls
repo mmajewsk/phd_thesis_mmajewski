@@ -125,7 +125,7 @@ BoldItalicFont=ArnoPro-BoldItalic
 
 \RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
 								textfont={sf,footnotesize,singlespacing},
-								justification={justified,rggedright},
+								justification={justified,raggedright},
 								singlelinecheck=false,
 								margin=0pt,
 								figurewithin=chapter,
