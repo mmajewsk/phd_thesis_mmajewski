@@ -1,13 +1,5 @@
-% -------------------------------------------------------------------
-%  @LaTeX-class-file{
-%     filename        = "Dissertate.cls",
-%     version         = "1.0",
-%     date            = "24 January 2014",
-%     codetable       = "ISO/ASCII",
-%     keywords        = "LaTeX, Dissertate",
-%     supported       = "send email to suchow@post.harvard.edu",
-%     docstring       = "Class for a dissertation."
-% --------------------------------------------------------------------
+
+
 
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage[centertags]{amsmath}
@@ -70,7 +62,7 @@
 \RequirePackage[tight,nice]{units}
 \RequirePackage{verbatim}
 \RequirePackage{afterpage}
-\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{4}
 
 \RequirePackage{url}
 \usepackage[titles]{tocloft}
@@ -123,17 +115,17 @@ ItalicFont=ArnoPro-Italic,
 BoldItalicFont=ArnoPro-BoldItalic
 ]{ArnoPro} %
 
-\RequirePackage[labelfont={bf,sf,footnotesize,singlespacing},
-								textfont={sf,footnotesize,singlespacing},
-								justification={justified,RaggedRight},
-								singlelinecheck=false,
-								margin=0pt,
-								figurewithin=chapter,
-								tablewithin=chapter]{caption}
-
+%\RequirePackage[labelfont={bf,sf,footnotesize,onehalfspacing},
+%								textfont={sf,footnotesize,onehalfspacing},
+%								justification={justified,RaggedRight},
+%								singlelinecheck=false,
+%								margin=0pt,
+%								figurewithin=chapter,
+%								tablewithin=chapter]{caption}
+\RequirePackage[labelfont={sf,bf,small},textfont={sf,small},justification=RaggedRight,margin=0pt, figurewithin=section, tablewithin=section]{caption}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
-%\onehalfspacing
+\onehalfspacing
 %\doublespacing
 
 % an environment for paragraph-style section
@@ -151,7 +143,7 @@ BoldItalicFont=ArnoPro-BoldItalic
 	\renewcommand{\headrulewidth}{0.0pt}
 	\begin{center}
 	\vspace*{1pt}
-	\Large \textcolor{SchoolColor}{\textit{Machine learning based long-lived particle reconstruction algorithm for Run 2 and upgrade LHCb trigger and a flexible software platform for the UT detector read-out chip emulation }} \normalsize\\
+	\Large \textcolor{SchoolColor}{\textit{Application of machine learning methods for the analysis of the calibration of the LHCb VELO detector, studies of irradiated silicon pixel sensors and reconstruction of the neutrino interaction in LARTPC detector}} \normalsize\\
 	\vspace*{15pt}
 	\sc Streszczenie \\ \rm
 	\end{center}
@@ -193,16 +185,16 @@ BoldItalicFont=ArnoPro-BoldItalic
 	{\LARGE \bf Doctoral thesis}\\
 	\vspace{13ex}
 	% --------------------------- IMIE I NAZWISKO -------------------------------
-	{\bf \Large Adam Dendek}\\
+	{\bf \Large Maciej Witold Majewski}\\
 	\vspace{3ex}
 	{\small \mbox{}}\\
 	\vspace{1.5ex}
 	{\small \mbox{}}\\
 	%\vspace{10ex}
 	%% ------------------------ TYTUL PRACY --------------------------------------
-	{\bf \LARGE Machine learning based long-lived particle reconstruction algorithm for Run 2 and upgrade LHCb trigger}\\
+	{\bf \LARGE Application of machine learning methods for the analysis of the calibration of the LHCb VELO detector, }\\
 	\vspace{6pt}
-	{\bf \LARGE and a flexible software platform for the UT detector read-out chip emulation}\\
+	{\bf \LARGE studies of irradiated silicon pixel sensors and reconstruction of the neutrino interaction in LARTPC detector}\\
 	\vspace{6pt}
 \end{center}
 \vspace{14ex}
@@ -271,3 +263,9 @@ This dissertation is ready to be reviewed.
       {\@latex@warning{Empty `thebibliography' environment}}
      \endlist}
 \makeatother
+\renewcommand{\copyrightpage}{
+	\newpage \thispagestyle{empty} \vspace*{\fill}
+	\sc \noindent \copyright~\textit{\@degreeyear \hspace{3pt}~- \theauthor} \\
+	\noindent All rights reserved.
+	\vspace*{\fill} \newpage \rm
+}

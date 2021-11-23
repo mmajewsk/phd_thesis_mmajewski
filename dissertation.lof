@@ -1,7 +1,56 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Short figure name.}}{7}{figure.caption.4}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1.1}{\ignorespaces Histogram of the all of the pedestal values, across all of the calibrations The histogram above is $P_{Ch, R, \#, T}$ and the below $P_{Ch, {"φ}, \#, T}$).\relax }}{8}{figure.caption.5}%
+\contentsline {figure}{\numberline {4.1.2}{\ignorespaces Pedestal plot for sensors $P_{Ch, R, \#64, T}$ $P_{Ch, R, \#35, T}$ $P_{Ch, R, \#85, T}$. $\#64$ and \#35 represent a typical pedestal values, while in \#85 there is a malfunction visible close to channel 1500.\relax }}{9}{figure.caption.6}%
+\contentsline {figure}{\numberline {4.1.3}{\ignorespaces Histogram of linear coefficient of the pedestal trend per channel. Some of the outlyingcoefficient values have been trimmed, and are outsidethe scope of this plot.\relax }}{10}{figure.caption.7}%
+\contentsline {figure}{\numberline {4.1.4}{\ignorespaces High threshold distribution with header cross-talk. $H_t(Ch, {"φ}, \#, T)$ above and $H_t(Ch, R, \#, T)$ below.\relax }}{10}{figure.caption.8}%
+\contentsline {figure}{\numberline {4.1.5}{\ignorespaces High threshold distribution without header cross-talk. $H_t(Ch*, {"φ}, \#, T)$ above and $H_t(Ch*, R, \#, T)$ below.\relax }}{10}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.1.6}{\ignorespaces High threshold distribution of all of the calibrations, across all sensors. $H_t(Ch,{"φ},\#, T)$ is above, and $H_t(Ch,{"φ},\#, T)$ is the plot below.\relax }}{11}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.1.7}{\ignorespaces Various R type calibration dates, with assigned value of outlierness.\relax }}{11}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.1.8}{\ignorespaces Various phi type calibration dates, with assigned value of outlierness.\relax }}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.1.9}{\ignorespaces All calond}}{12}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.1.10}{\ignorespaces Distribution of blocked channels per sensor in time.\relax }}{13}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.1.11}{\ignorespaces Total number of occurances of masked channels versus time.\relax }}{13}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.1.12}{\ignorespaces Outlying values other than masked channels.\relax }}{14}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.2.1}{\ignorespaces 500 channels from a single calibration date marked with X=10\relax }}{16}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.2.2}{\ignorespaces 500 channels from a single generated calibration at X=10\relax }}{16}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.2.3}{\ignorespaces Screenshot from the outlierness monitoring in Lovell software.\relax }}{16}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.3.1}{\ignorespaces \relax }}{17}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.3.2}{\ignorespaces All calibrationd}}{18}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.3.3}{\ignorespaces All calibrationd}}{19}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.3.4}{\ignorespaces All calond}}{20}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.3.5}{\ignorespaces Time progression of selected section of calibration dates, with reduced dimentionality using PCA, only for R sensors.\relax }}{21}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.3.6}{\ignorespaces Time progression of selected section of calibration dates, with reduced dimentionality using PCA, only for phi sensors.\relax }}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.3.7}{\ignorespaces Time progression of selected section of calibration dates, with reduced dimentionality using autoencoder, only for R sensors.\relax }}{22}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.3.8}{\ignorespaces Time progression of selected section of calibration dates, with reduced dimentionality using autoencoder, only for phi sensors.\relax }}{22}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.3.9}{\ignorespaces All calibrationd}}{23}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.5.1}{\ignorespaces Histogram of lengths of runs in the dataset, expressed in seconds. Significant ammount of runs lasted about 3600 seconds (1 hour).\relax }}{24}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.5.2}{\ignorespaces Two numerical solutions}}{25}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.7.1}{\ignorespaces And examplary clusterisation using DBSCAN (${"ε}$ = 10, MinPts = 4) on the binary pixel-map. Clusters are numbered 1-5.\relax }}{27}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.7.2}{\ignorespaces Rows represent clusters on image A in Figure \nobreakspace {}\ref {fig:fin_clus}, columns represent clusters on image B in Figure \nobreakspace {}\ref {fig:fin_clus}. Values indicate the Spacial Characteristics Similarity Measure \textit {V} (left plot), and Positional Similarity Measure \textit {${"Φ}$} (middle plot). The M matrix is the rightmost plot. \relax }}{29}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.7.3}{\ignorespaces Clusters labelled with the same integer are chosen by the algorithm as the consecutive generations of the same cluster. Clusters labeled as 'new' are clusters on the time step $t_{n}$ that were absent on time step $t_{n-1}$.\relax }}{29}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.7.4}{\ignorespaces The fraction of pixels categorised as belonging to any clusters (Y axis) in next consecutive calibrations (X axis), since the cluster introduction to calibration (number of timesteps $n=300$). The number of detected pixels slowly decreases with time. The OPTICS algorithm (left plot) recognises the pixels of the clusters as belonging to a cluster (not necessarily the same one) for a longer amount of time. The DBSCAN is more strict in distinguishing the pixels that belong to clusters. \relax }}{30}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.7.5}{\ignorespaces The number of clusters classified as being "old" - same as in previous calibration (blue colour), and a number of clusters marked as "new" - not being the same clusters as in previous calibration (orange color). The left plot belongs to OPTICS, and the one on the right to DBSCAN. \relax }}{31}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.8.1}{\ignorespaces An examplary plot of surrogate funciton.\relax }}{31}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.8.3}{\ignorespaces Surrogate parameters distribution part2}}{32}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.8.2}{\ignorespaces Surrogate parameters distribution part 2}}{33}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.8.4}{\ignorespaces A heatmap of the binning used in the analysis of the fluence. Each color represents a different elliptical binning. The binning starts from 0 in the center, and the outermost bin is labeled as 7.\relax }}{34}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.8.5}{\ignorespaces Parameters in s8 bins}}{35}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.8.6}{\ignorespaces Corelation surogate params}}{36}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.8.7}{\ignorespaces Examplary surrogates\relax }}{36}{figure.caption.46}%
+\contentsline {figure}{\numberline {4.8.8}{\ignorespaces Examplary case of surrogate model on the entire sensor. Each column of the plots representes different parameter of surrogate function. First row of plots is the total distribution of parameterrs in the data. The middle row shows the distribution after scaling and PCA, with gaussian function outline in orange. The bottom row shows the same actual distribution as in first row in blue, and a distribtion of generated parameters using the inverse model procedure and generating samples from underlying gaussian distributuion. \relax }}{37}{figure.caption.47}%
+\contentsline {figure}{\numberline {4.8.10}{\ignorespaces model pre ir}}{39}{figure.caption.49}%
+\contentsline {figure}{\numberline {4.8.11}{\ignorespaces model post ir}}{40}{figure.caption.50}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1.1}{\ignorespaces \relax }}{43}{figure.caption.51}%
+\contentsline {figure}{\numberline {5.1.2}{\ignorespaces The schematic of Storck deployment process. The light green color means optional components.\relax }}{46}{figure.caption.53}%
+\contentsline {figure}{\numberline {5.1.3}{\ignorespaces view of a gitlab pipeline\relax }}{46}{figure.caption.54}%
+\contentsline {figure}{\numberline {5.1.4}{\ignorespaces Storcks web interface.\relax }}{47}{figure.caption.55}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.0.1}{\ignorespaces A plot explaining the scope of the boxplot (@TODO add this to appendix). The top plot represent the boxplot, with median in the middle. The range of the box spans from Quartile 1 to Quartile 3. The interquartile region (IQR) is the width of the box. The whiskers span from the edges of the box to length of 1.5 IQR to either side of the axis. The two bottom plots explain the ranges in terms of percentages and width of the distribution. Additionaly, an outlier is a value lying outside the both whiskers range. \relax }}{54}{figure.caption.57}%

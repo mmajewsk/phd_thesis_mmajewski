@@ -12,8 +12,16 @@ and also running it with xelatex
 - https://hep.yale.edu/yale-henp/lartpc official website
 - the data website http://deeplearnphysics.org/DataChallenge/
 *** TODO make a new name
+
 * Done
 * Notes:
 ** Titles:
 - Zastosowanie metod uczenia maszynowego do analizy danych kalibracyjnych detektora LHCb VELO, badania właściwości naświetlonych sensorów pikselowych oraz rekonstrukcji przypadków rozproszeń neutrin w e LArTPC
 - Application of machine learning methods for analisys of the calibration of the LHCb VELO detector, studies of irradiate silicon pixel sensors and reconstrucion of the neutrino decays in LARTPC detector
+** Inspiration theses:
+- https://s3-eu-west-1.amazonaws.com/ccauet-website-storage/pdf/phd_thesis_ccauet.pd
+- https://cds.cern.ch/record/2694020/files/CERN-THESIS-2019-172.pdf
+- http://fizyka.agh.edu.pl/doktoraty/Monika_Chudyba_rozprawa.pdf
+- http://fizyka.agh.edu.pl/doktoraty/fulek_rozprawa.pdf
+** Introduction
+  https://en.wikipedia.org/wiki/Theory_of_everything
