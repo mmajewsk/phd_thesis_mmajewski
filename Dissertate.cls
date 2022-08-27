@@ -75,7 +75,7 @@
 \renewcommand\listfigurename{Listing of figures}
 
 \onehalfspacing
-\raggedright
+%\raggedright
 \parindent 12pt
 
 \RequirePackage{mathspec}%
@@ -125,7 +125,6 @@ BoldItalicFont=ArnoPro-BoldItalic
 %								figurewithin=chapter,
 %								tablewithin=chapter]{caption}
 \RequirePackage[labelfont={sf,bf,small},textfont={sf,small},justification=RaggedRight,margin=0pt, figurewithin=section, tablewithin=section]{caption}
-
 % \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \onehalfspacing

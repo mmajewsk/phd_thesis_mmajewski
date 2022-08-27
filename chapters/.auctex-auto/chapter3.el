@@ -26,6 +26,7 @@
     "eq:belman2"
     "eq:belman3"
     "eq:Qlearning"
+    "sec:dqn"
     "eq:deepQlearning"
     "eq:deepQlearningTarget"
     "eq:doubleQlearning"

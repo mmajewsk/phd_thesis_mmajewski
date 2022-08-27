@@ -9,7 +9,7 @@ Talk is cheap. Show me the code.
 The development of the Large Hadron Collider was foreseen in steps, consisting of data-taking runs and technical stops.
 Since the radiation may cause damage to the parts of the accelerator as well as to the parts of the detectors, these interruptions are necessary not only to mitigate the radiation damage but to provide a window of opportunity for the upgrade of the composition of the detectors.
 Since many of the procedures that rely on the detectors are tailor-fitted to the devices, parts of the software created for previous versions of the hardware cannot be possibly used for the upgraded setup.
-The Storck project was created for handling and tracking of the calibration data. The Titania project was designed and implemented in place of the old monitoring system called Lovell.
+The Storck project was created because of the lack of a system for handling and tracking of the calibration data. The Titania project was designed and implemented in place of the old monitoring system called Lovell.
 
 \section{Storck}
 
@@ -75,7 +75,7 @@ The Fig. \ref{fig:storck_diagram} contains a schematic diagram for the data flow
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.65\textwidth]{figures/chapter5/storck/storck diagram.drawio.png}
+\includegraphics[width=0.95\textwidth]{figures/chapter5/storck/storck diagram.drawio.png}
 \caption{The conceptual chart of the data flow in the Storck service.}
 \label{fig:storck_diagram}
 \end{figure}
@@ -239,13 +239,6 @@ It is now perfectly possible to do those things from the GitLab web interface.
 \label{fig:storck-gitlab}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/chapter5/storck/screenshot_web.png}
-\caption{Storck's web interface.}
-\label{fig:storck-web-interface}
-\end{figure}
-
 Automatic deployment can be set in various ways.
 In the case of Storck, the pipeline was set up to run unit tests on every git commit pushed to any branch on GitLab.
 Then, if the test did not fail, it is possible to use a button to deploy Storck to the staging server.
@@ -254,7 +247,12 @@ Fig. \ref{fig:storck-gitlab} shows a view of a single pipeline in GitLab.
 
 \subsection{Storck web interface}
 
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/chapter5/storck/screenshot_web.png}
+\caption{Storck's web interface.}
+\label{fig:storck-web-interface}
+\end{figure}
 
 Storck's web interface is very basic, as it is not meant to be the primary way of interacting with storck.
 In Fig. \ref{fig:storck-web-interface}, on the left side, there is a space that contains the user's username, id and user token.
@@ -671,12 +669,9 @@ class WeatherGUI(Weather, QtBaseLayoutTab):
 \caption{WeatherGUI class split into two classes}.
 \label{listing:weather_split}
 \end{listing}
-
-
 Such split allows for the implementation of the \textbf{WeatherWeb} class (Listing \ref{listing:weather_split}), which will be used for the web interface view.
 The implementation in Listing \ref{listing:weather_webclass} implementation inherits the \textbf{Weather} class and \textbf{QtTitaniaWebTab}.
 Both provide inheritance valid for the web view.
-
 \begin{listing}[!ht]
 \begin{minted}{python}
 class WeatherWeb(Weather, QtTitaniaWebTab):
@@ -699,8 +694,7 @@ class WeatherWeb(Weather, metaclass=WebMetaclass):
 \caption{WeatherWeb metaclass}
 \label{listing:weather_web_meta}
 \end{listing}
-
-Both Listing \ref{listing:weather_webclass} and Listing \ref{listing:weather_web_meta} are good ways of creating the web interface view.
+Both Listing \ref{listing:weather_web_class} and Listing \ref{listing:weather_web_meta} are good ways of creating the web interface view.
 To enable the web interface, a new configuration file must be created ``config\_web.py'' (Listing \ref{listing:weather_web_config}). It should include the new web view class in the dictionary.
 
 \begin{listing}[!ht]
@@ -716,7 +710,7 @@ config = {
 
 Next, the config dictionary should be imported and executed in a new ``main\_web.py'' (Listing \ref{listing:weather_web_main}) file that will start a small web server and host the interface on the \href{http://localhost:5000}{http://localhost:5000}.
 
-\begin{listing}[!h]
+\begin{listing}[!ht]
 \begin{minted}{python}
 import config_web
 from titania.web.main_window import MainWindow

@@ -68,7 +68,7 @@ Low Threshold and High Threshold only differ in scaling factor, so in further an
 
 %This data is difficult the analysis because of the scope of its dimensionality. 
 The dimensionality and complicated nature of the Velo calibration dataset pose a serious problem for their efficient analysis.
-A single Velo sensor has 2048 readout channels, which constitutes the channel dimension. The sensors are of two types $R$ and $\Phi$-type for each of the 42 modules, creating sensor-type and module number dimensions. Finally, each calibration is distinguished by the calibration date. This is summarised in Table \ref{tab:velo_dimentionality}.
+A single Velo sensor has 2048 readout channels, which constitutes the channel dimension. The sensors are of two types $R$ and $\phi$-type for each of the 42 modules, creating sensor-type and module number dimensions. Finally, each calibration is distinguished by the calibration date. This is summarised in Table \ref{tab:velo_dimentionality}.
 
 \begin{table}[h]
 \begin{center}
@@ -77,9 +77,9 @@ A single Velo sensor has 2048 readout channels, which constitutes the channel di
 Dimention name & Symbol & Size\\
 \hline
 Channel & $Ch$ & 2048\\
-Sensor type & ${R, \Phi}$ & 2 ($R$ or $\Phi$) \\
+Sensor type & ${R, \phi}$ & 2 ($R$ or $\phi$) \\
 Module number & $\#$ & 42 \\
-Calibration date & $D$ & 30\\
+Calibration date & $T$ & 30\\
 \hline
 \end{tabular}
 \caption{\label{tab:velo_dimentionality}Table of dimentionality of the calibration dataset.}
@@ -95,9 +95,8 @@ I do not provide the exact colour scale in most plots, but it follows the intuit
 This kind of figure has proved to be very useful since it can aggregate multiple dimensions of the data.
 
 For ease of understanding, I introduce the following notation of the dataset slice: 
-$$
-ParameterType(Ch, S, \#, D)
-$$
+
+$ParameterType(Ch, S, \#, D)$, 
 
 where $ParameterType$ stands for the type of the parameter like $P$ or $H_t$ and the other symbols are explained in the Table \ref{tab:velo_dimentionality}.
 A single symbol without values marks the use of a full range of data on that dimension.
@@ -130,7 +129,7 @@ This is not a significant problem for the overall data quality, since the effect
    \label{plot:ped_phi}
   \end{subfigure}
       % \caption[All calond]{All of the calibrations, with reduced dimentionality using autoencoder and PCA.}
-    \caption{Histogram of the all of the pedestal values across all of the calibrations The histogram above is $P_(Ch, R, \#, D)$ and the below $P(Ch, \Phi, \#, D)$).}
+    \caption{Histogram of the all of the pedestal values across all of the calibrations The histogram above is $P_{Ch, R, \#, T}$ and the below $P(Ch, \phi, \#, T)$).}
     \label{plot:part1-r-phi-pedestals}
 
   \end{figure}
@@ -138,14 +137,14 @@ This is not a significant problem for the overall data quality, since the effect
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=0.7\linewidth]{figures/chapter4/calib_analysis/Part1-r-phi-pedestals.png}
-%     \caption{Histogram of the all of the pedestal values, across all of the calibrations The histogram above is $P_{Ch, R, \#, T}$ and the below $P_{Ch, \Phi, \#, T}$).}
+%     \caption{Histogram of the all of the pedestal values, across all of the calibrations The histogram above is $P_{Ch, R, \#, T}$ and the below $P_{Ch, \phi, \#, T}$).}
 %     \label{plot:part1-r-phi-pedestals}
 % /\end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/chapter4/calib_analysis/Part1-outliers-pedestals-cases.png}
-    \caption{Pedestal plot for sensors (from the top) $P(Ch, R, \#64, D)$ $P(Ch, R, \#35, D)$ $P(Ch, R, \#85, D)$. $\#64$ and \#35 represent a typical pedestal values, while in \#85 there is a malfunction visible close to channel 1500.}
+    \includegraphics[width=0.7\linewidth]{figures/chapter4/calib_analysis/Part1-outliers-pedestals-cases.png}
+    \caption{Pedestal plot for sensors (from the top) $P(Ch, R, \#64, T)$ $P(Ch, R, \#35, T)$ $P(Ch, R, \#85, T)$. $\#64$ and \#35 represent a typical pedestal values, while in \#85 there is a malfunction visible close to channel 1500.}
     %@TODO recast the sensors to their modules, and check the sensor type
     % - im leaving this comment since i don't remember what this was about exactly
     % - but the sensor type matches the description
@@ -175,7 +174,7 @@ The high threshold parameter, $H_{t}$, is the one actually responsible for the s
 Again, we start first at the simple exploratory analysis of the whole dataset. At the first glance, the 2D histograms presented in Fig. \ref{plot:part2-threshold-all} are cluttered by outlying values.
 The most visible ones are near value 127 across all channels.
 This is an expected sight, as value 127 is the maximal possible value.
-Setting the value of the threshold in the channel to 127 means that only the signal that exceeds this threshold is accepted. Which, in reality, means that no signal will come through the channel as it would have to reach values greater than the dynamic range of the ADC value after the pedestal subtraction\footnote{The dynamic range of the Velo readout chain after signal digitisation and before pedestal subtraction is 10 bits without sign. Pedestal subtraction aims at equalisation of the properties of the readout channels across the detector. After the pedestal correction the dynamic range corresponds to 8 bits with sign, so effectively, we can observe signals in the range of -128 to 127 ADC counts.}. This, forces the data coming from such channels to be discarded.
+Setting the value of the threshold in the channel to 127 means that only the signal that exceeds this threshold is accepted. Which, in reality, means that no signal will come through the channel as it would have to reach values greater than the dynamic range of the ADC value after the pedestal subtraction \footnote{The dynamic range of the Velo readout chain after signal digitisation and before pedestal subtraction is 10 bits without sign. Pedestal subtraction aims at equalisation of the properties of the readout channels across the detector. After the pedestal correction the dynamic range corresponds to 8 bits with sign, so effectively, we can observe signals in the range of -128 to 127 ADC counts.}. This, forces the data coming from such channels to be discarded.
 This is a masking value, evolution of the distribution of those masks are discussed in detail in the next Section (\ref{chap4:masks}).
 The other visible artefact are spikes within channel range fron 1000 to 1250.
 This comes from faulty  sensor  \#67  and  dates  ’2016-11-07’  and  ’2016-11-11’,  where  the  threshold  values  reached non-physical value of 400  ADC. This is likely an error that could accidentally get into the dataset, and yet there is no explanation for those values (most likely an electrical disturbance influenced severely the global offset level).
@@ -184,12 +183,12 @@ Moving on, we will treat those values as outliers and remove from the analysis.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{figures/chapter4/calib_analysis/P2-threshold-all-r-phi.png}
-    \caption{High threshold distribution of all of calibrations, across all sensors. $H_t(Ch,\Phi,\#, D)$ is above, and $H_t(Ch,R,\#, D)$ is the plot below.}
+    \caption{High threshold distribution of all of calibrations, across all sensors. $H_t(Ch,\phi,\#, D)$ is above, and $H_t(Ch,R,\#, D)$ is the plot below.}
     \label{plot:part2-threshold-all}
 \end{figure}
 
 
-The Fig. \ref{plot:P2-threshold-all-zoom} depicts $H_t(Ch, R, \#, D)$ and $H_t(Ch, \Phi, \#, D)$ in range of values from 0 to 30.
+The Fig. \ref{plot:P2-threshold-all-zoom} depicts $H_t(Ch, R, \#, D)$ and $H_t(Ch, \phi, \#, D)$ in range of values from 0 to 30.
 One of the immediately visible features are the sparse spikes regularly distributed across the sensors.
 Those spikes represent, so called, header cross-talk effect (Sec. \ref{chap2:headercrosstalk}), that affects specific channels during the analogue transmission of the data from the detector to the trigger processing farm.
 In some cases, it might be helpful to exclude the channels that contain the header cross-talk effect.
@@ -199,14 +198,14 @@ The reader can examine the difference of the histogram with and without header c
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/chapter4/calib_analysis/P2-threshold-all-zoom.png}
+    \includegraphics[width=\linewidth]{figures/chapter4/calib_analysis/P2-threshold-all-zoom.png}
     \caption{High threshold distribution with header cross-talk $H_t(Ch, R, \#, D)$.}
     \label{plot:P2-threshold-all-zoom}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/chapter4/calib_analysis/P2-threshold-all-zoom-nohc.png}
+    \includegraphics[width=\linewidth]{figures/chapter4/calib_analysis/P2-threshold-all-zoom-nohc.png}
     \caption{High threshold distribution without header cross-talk $H_t(Ch*, R, \#, D)$}
     \label{plot:P2-threshold-all-zoom-nohc}
 \end{figure}
@@ -214,17 +213,17 @@ The reader can examine the difference of the histogram with and without header c
 
 Another insight coming from the 2D histogram presented in Fig. \ref{plot:P2-threshold-all-zoom-nohc} is that low-intensity regularities repeat roughly every 512 channels. The periodicity of those regularities comes from the sensors' physical design and the specific topology of the strip implants.
 More precisely, they are related to imperfect calibrations coming from two dates:  '2012-07-30', '2012-08-01'.
-Those two dates are imperfect due to the improper response of the high voltage system that failed to provide bias voltage to the sensors on those dates. In consequence a very large noise was observed. The particular shape of the noise distributions for $R-$ and $\Phi$-type sensors reflect the physical dimensions of the strips. For the former strip length increases gradually, in each of the sensor's four sectors, as a function of radius. For the latter strip length is constant for inner and outer sectors (with shorter strips in the inner region).
+Those two dates are imperfect due to the improper response of the high voltage system that failed to provide bias voltage to the sensors on those dates. In consequence a very large noise was observed. The particular shape of the noise distributions for $R-$ and $\phi$-type sensors reflect the physical dimensions of the strips. For the former strip length increases gradually, in each of the sensor's four sectors, as a function of radius. For the latter strip length is constant for inner and outer sectors (with shorter strips in the inner region).
 These imperfect calibrations influenced the sensitivity of the detector and impacted severly the Velo data quality. 
 Additionally, for the purpose of outliers analysis, two calibration dates also are being recognised as imperfect 2012-08-02 and 2011-03-07.
-The overall four imperfect calibrations can be seen in Fig. \ref{plot:all-bad-r} and Fig. \ref{plot:all-bad-phi}.
-Those occurrences of mis-calibrations were a direct motivation for detecting anomalies in the calibration in Section \ref{chap4:outlierness}. Lack of such automatic procedures led to data loss due to very low hit reconstruction efficiency of the Velo.
+The overall four imperfect calibrations can be seen in Fig. \ref{plot:all-bad-phi} and Fig. \ref{plot:all-bad-phi}.
+Those occurrences of mis-calibrations were a direct motivation for detecting anomalies in the calibration in Section\ref{chap4:outlierness}. Lack of such automatic procedures led to data loss due to very low hit reconstruction efficiency of the Velo.
 
 \begin{figure}
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-R-0.png}
-    \caption{$H_t(Ch*, R, \#, \text{2012-08-01}), X=10$}
+    \caption{$H_t(Ch*, R, \#, 2012-08-01), X=10$}
     \label{plot:all-bad-r-0}
   \end{subfigure}
 
@@ -232,7 +231,7 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-R-1.png}
-    \caption{$H_t(Ch*, R, \#, \text{2012-07-30}), X=10$}
+    \caption{$H_t(Ch*, R, \#, 2012-07-30), X=10$}
     \label{plot:all-bad-r-1}
   \end{subfigure}
 
@@ -240,7 +239,7 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-R-2.png}
-    \caption{$H_t(Ch*, R, \#, \text{2012-08-02}), X=3$}
+    \caption{$H_t(Ch*, R, \#, 2012-08-02), X=3$}
     \label{plot:all-bad-r-2}
   \end{subfigure}
 
@@ -248,11 +247,10 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-R-3.png}
-    \caption{$H_t(Ch*, R, \#, \text{2011-03-07}), X=1$}
+    \caption{$H_t(Ch*, R, \#, 2011-03-07), X=1$}
     \label{plot:all-bad-r-3}
   \end{subfigure}
     \caption{Histograms of imperfect calibrations in $R$-type sensors with their outlierness value $X$.}
-    \label{plot:all-bad-r}
 \end{figure}
 
 \begin{figure}
@@ -260,7 +258,7 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-phi-0.png}
-    \caption{$H_t(Ch*, \Phi, \#, \text{2012-08-01}), X=10$}
+    \caption{$H_t(Ch*, \phi, \#, 2012-08-01), X=10$}
     \label{plot:all-bad-phi-0}
   \end{subfigure}
 
@@ -268,7 +266,7 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-phi-1.png}
-    \caption{$H_t(Ch*, \Phi, \#, \text{2012-07-30}), X=10$}
+    \caption{$H_t(Ch*, \phi, \#, 2012-07-30), X=10$}
     \label{plot:all-bad-phi-1}
   \end{subfigure}
 
@@ -276,7 +274,7 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-phi-2.png}
-    \caption{$H_t(Ch*, \Phi, \#, \text{2012-08-02}), X=3$}
+    \caption{$H_t(Ch*, \phi, \#, 2012-08-02), X=3$}
     \label{plot:all-bad-phi-2}
   \end{subfigure}
 
@@ -284,10 +282,10 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     \begin{subfigure}[b]{\textwidth}
     \centering
     \includegraphics[width=0.9\linewidth]{figures/chapter4/calib_analysis/P2-all-bad-cals-phi-3.png}
-    \caption{$H_t(Ch*, \Phi, \#, \text{2011-03-07}), X=1$}
+    \caption{$H_t(Ch*, \phi, \#, 2011-03-07), X=1$}
     \label{plot:all-bad-phi-3}
   \end{subfigure}
-    \caption{Histograms of imperfect calibrations in $\Phi$ sensors with their outlierness value $X$.}
+    \caption{Histograms of imperfect calibrations in \phi sensors with their outlierness value $X$.}
     \label{plot:all-bad-phi}
 \end{figure}
 
@@ -297,13 +295,13 @@ Those occurrences of mis-calibrations were a direct motivation for detecting ano
     
     \begin{subfigure}[b]{\textwidth}
     \includegraphics[width=\linewidth]{figures/chapter4/calib_analysis/P2-only-good-R.png}
-    \caption{ .}
+    \caption{$H_t(Ch, \Phi, \#, 2012-08-02), X=0$}
    \label{plot:only_good_r}
   \end{subfigure}
   
   \begin{subfigure}[b]{\textwidth}
     \includegraphics[width=\linewidth]{figures/chapter4/calib_analysis/P2-only-good-phi.png}
-    \caption{ .}
+    \caption{$H_t(Ch, R, \#, 2012-08-02), X=0$}
    \label{plot:only_good_phi}
   \end{subfigure}
       \caption[All calond]{All of the calibrations, with reduced dimensionality using autoencoder and PCA.}
@@ -340,7 +338,7 @@ This is expected as with time the negative radiation effects accumulate (see Sec
 
 Apart from the masked values, the usual and outlying calibration, there is still a part of the data which doesn't fit any of those categories.
 This part of data can be characterised as the $H_{t} > 50 ADC \land H_{t} \neq 127 ADC$.
-Fig \ref{plot:p3-other-outliers} depicts those other outliers. The number of occurrences of these outliers changes from calibration to calibration, but overall is limited to three sensors: \#85 \#67 and \#94 (all $\Phi$-type sensors). These anomalies have never been clearly characterised. The visual inspection did not indicate any surface damage on sensors, so that would point to instabilities in the electronics readout chain. Nevertheless, these bad channels were accounted for and did not affect the data quality.
+Fig \ref{plot:p3-other-outliers} depicts those other outliers. The number of occurrences of these outliers changes from calibration to calibration, but overall is limited to three sensors: \#85 \#67 and \#94 (all $\phi$-type sensors). These anomalies have never been clearly characterised. The visual inspection did not indicate any surface damage on sensors, so that would point to instabilities in the electronics readout chain. Nevertheless, these bad channels were accounted for and did not affect the data quality.
 
 
 \begin{figure}
@@ -388,21 +386,17 @@ There is no scale or limit on the outlierness number. Other than that, the 0 rep
 The actual assigned values can be seen in the Table \ref{data-table}, and the related calibration parameters can be seen in Fig. \ref{plot:all-bad-phi-0}-\ref{plot:all-bad-phi-3} and Fig. \ref{plot:all-bad-r-0}-\ref{plot:all-bad-r-3}.
 
 \begin{table}[h]
-
+\caption{\label{data-table} Calibration dataset and their corresponding outlierness values.}
 \begin{center}
-\begin{tabular}{ |c|c| }
-\hline
+\begin{tabular}{ll}
 Calibration date& X\\
-\hline
 2011-03-07&1\\
 2012-08-02&3\\
 2012-07-30&10\\
 2012-08-01&10\\
 all others&0\\
-\hline
 \end{tabular}
 \end{center}
-\caption{\label{data-table} Calibration dataset and their corresponding outlierness values.}
 \end{table}
 
 \subsection{Model}
@@ -449,7 +443,7 @@ The first part is visible in Listing \ref{listing:calina1}, and the second in li
 The first part uses only $D\prime$ calibrations, and the second part uses $D \setminus D\prime$.
 Both of the learning processes were conducted with 80000 training steps and 20000 tuning steps.
 
-\begin{listing}[H]
+\begin{listing}[!ht]
 \begin{minted}{python}
 with pm.Model() as model:
     sds = pm.Uniform("sds", 0, 0.75, shape=positive.shape[1])
@@ -464,7 +458,7 @@ with model:
 \label{listing:calina1}
 \end{listing}
 
-\begin{listing}[H]
+\begin{listing}[!ht]
 \begin{minted}{python}
 with pm.Model() as model:
   x = pm.Uniform('x', 0,40, observed=xfactor[:,np.newaxis])
@@ -495,7 +489,7 @@ This approach has additional benefits such as:
 \begin{itemize}
   \item Partial dimensional independence - This model can be used to extract the value of the outlierness not only for the entire calibration but also for a specific sensor, or module, or a group of channels, or even just a specific channel. This allows for a more detailed insight as it can bring focus to one particular part of a detector that exhibits more anomalous behaviour.
   \item Generation of artificial data - Because the probabilistic programming is based on statistical inference, simply by calculating the $\mu, \mu\prime$ and $\sigma, \sigma\prime$ parameters of a Gaussian distribution we can generate a high quality artificial sample.
-  \item Interpolation and Extrapolation - This model was trained only on four different values of $X$, and yet, it is capable to assess the outlierness value not only in the range between those four values (e.g. $X=5$), but also through the generation of artificial data, it can show what a calibration that is outside the scope of observed calibration dataset (e.g. $X=12$) might look like. This feature is also essential for detecting any further anomalies (see \ref{plot:outlierness_data_example}).
+  \item Interpolation and Extrapolation - This model was trained only on four different values of $X$, and yet, it is capable to assess the outlierness value not only in the range between those four values (e.g. $X=5$), but also through the generation of artificial data, it can show what a calibration that is outside the scope of observed calibration dataset (e.g. $X=12$) might look like. This feature is also essential for detecting any further anomalies.
 \end{itemize}
 
 
@@ -503,14 +497,14 @@ This approach has additional benefits such as:
     \centering
 \begin{subfigure}[b]{\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/chapter4/outlierness/real_data.png}
+    \includegraphics[width=0.7\linewidth]{figures/chapter4/outlierness/real_data.png}
     \caption{}
     \label{plot:real-data}
   \end{subfigure}
 
 \begin{subfigure}[b]{\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/chapter4/outlierness/generated_data.png}
+    \includegraphics[width=0.7\linewidth]{figures/chapter4/outlierness/generated_data.png}
     \caption{}
     \label{plot:generated-data}
   \end{subfigure}
@@ -518,11 +512,11 @@ This approach has additional benefits such as:
 
 \begin{subfigure}[b]{\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/chapter4/outlierness/generated_x12.png}
+    \includegraphics[width=0.7\linewidth]{figures/chapter4/outlierness/generated_x12.png}
     \caption{}
     \label{plot:generated-12}
   \end{subfigure}
-    \caption{500 channels from a (a) single calibration date marked with X=10, (b) an example of a single generated calibration parameters at X=10, (c) an example of a single generated calibration parameters at X=12.}
+    \caption{500 channels from a (a) single calibration date marked with X=10, (b) an example of a single generated calibration parameters at X=12, (c) an example of a single generated calibration parameters at X=12.}
     \label{plot:outlierness_data_example}
 \end{figure}
 
@@ -530,12 +524,12 @@ In Fig. \ref{plot:real-data} there is a sample of the data (500 channels) that c
 It can be noted that the range of the $H_{t}$ values is on par with those visible in the plot of the generated dataset Fig. \ref{plot:generated-data}.
  Additionally in Fig. \ref{plot:generated-12} there is a plot of calibration with value $X=12$, which was not present in the dataset and is actually outside the scope of the dataset.
 
-This model was introduced to the Lovell VELO monitoring system in the second half of the year 2018, and was used to monitor the calibration data. The Figure \ref{plot:gui} depicts a screenshot from the monitoring system and shows outlierness levels for sensor $\#21$, for all consecutive calibrations. It is noticeable that the value of the outlierness was slightly elevated in 2017, which is attributed to some changes in the cooling system. It is worth noticing that this algorithm was the first Machine Learning based model specifically trained for purpose of supporting the monitoring tasks in the LHCb experiment. 
+This model was introduced to the Lovell VELO monitoring system in the second half of the year 2018, and was used to monitor the calibration data. The Figure \ref{plot:gui} depicts a screenshot from the monitoring system and shows outlierness levels for sensor \# 21. It is noticeable that the value of the outlierness was slightly elevated in 2017, which is attributed to some changes in the cooling system. It is worth noticing that this algorithm was the first Machine Learning based model specifically trained for purpose of supporting the monitoring tasks in the LHCb experiment. 
 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/chapter4/outlierness/calina_lovell_screenshot.png}
+    \includegraphics[width=0.7\linewidth]{figures/chapter4/outlierness/calina_lovell_screenshot.png}
     \caption{Screenshot from the outlierness monitoring in Lovell software.}
     \label{plot:gui}
   \end{figure}
@@ -577,7 +571,7 @@ This dimensionality reduction can be understood as a mapping:
 \end{align}
 
 This means that $X_{n,\#}$ is a 2 dimensional vector, representing an $n$-th channel in $\#$ sensor. 
- Because of the high number of individual sensors and for the clarity, the result of the PCA application on the dataset was split into several plots (Fig. \ref{plot:pca_all_peda}, \ref{plot:pca_all_pedb} and \ref{plot:pca_all_ped_phia}, \ref{plot:pca_all_ped_phib}).
+ Because of the high number of individual sensors, the split into several plots gives more clarity (Fig. \ref{plot:pca_all_peda}, \ref{plot:pca_all_pedb} and \ref{plot:pca_all_ped_phia}, \ref{plot:pca_all_ped_phib}).
 
   The reduced dataset shows a 2D gaussian distribution.
   It can be seen that some of the channels from a particular sensor can form clusters or be distributed on a ring on the border of the dataset.
@@ -627,7 +621,7 @@ This means that $X_{n,\#}$ is a 2 dimensional vector, representing an $n$-th cha
   \end{subfigure}
 
 \caption[All calibrationb]{Pedestal calibrations in $R$-type sensors (21-41) reduced with PCA.}
-\label{plot:pca_all_pedb}
+\label{plot:pca_all_ped}
 \end{figure}
 
 
@@ -824,7 +818,7 @@ The statistical analysis of the calibration parameters' trends, described previo
 \end{equation}
 Where $\mu_{current}$ is the mean of all pedestal subtracted data coming from the current run and $\mu_{calibration}$ all pedestal subtracted data evaluated after the calibration. Since, the calibration should produce the flat baseline (i.e., the mean value measured at each channel should be centred at 0 ADC), the 1-dimensional summary histogram after the calibration was expected to be approximately normal with the mean value equal to 0 ADC counts and variance close to 0.5 ADC counts. Now, one can analyse the time evolution of the summary histograms produced for RAW data taken at later times\footnote{RAW data samples were also taken during regular physics runs for the monitoring purposes. Usually, for a long run a few thousands of RAW events were taken.} with respect to a given calibration parameters. The main premise being, that the drifting pedestals should affect the summary histogram in a specific way. The study of the $\Delta\mu$ was not conclusive, which is compatible with previous analysis that showed no clear trend in pedestal values over the time.
 However, the analysis of the variance, $\sigma(\Delta\mu)$, showed a clear trend in time. An example of this is presented in Fig.
-\ref{plot:wtte1-stdevs}. These results show that the width of subsequent summary plots getting larger, thus, $\sigma(\Delta\mu)$ steadily grows in time between calibrations.
+\ref{plot:wtte1-stdevs}. These results show that the width of subsequent summary plots getting larger, thus, $\sigma(\Delta\mu)$ steadily grows in time.
 
 \begin{figure}
 \centering
@@ -994,12 +988,12 @@ Sadly it is not the case.
 The data-taking mode of the VeloPix is focused on selecting the tracks that can be used for physics study purposes and discards all other information.
 The rate of the particles incoming to the detector promotes the processing speed and forces not to process more data than is necessary.
 The awareness of the radiation damage always comes only after the fact. We cannot measure it before it happens.
-Luckily, in the VeloPix sensors, there exists a mechanism that is influenced by the damage introduced to the silicon.
+Thus, in the VeloPix sensors, there exists a mechanism that is influenced by the damage introduced to the silicon.
 By measuring the change in the behaviour of that mechanism, we can determine its damage and, in turn, its fluency.
 The surrogate function relates the ToT signal from the sensor to the charge gathered.
 The process of calculating the parameters of the surrogate function is de-facto measuring the response of the silicon to the charge deposit. 
 This is the mechanism and the link between the fluence and the detector parameters that we can leverage to our advantage.
-The Sec. \ref{sec:surrogates-study} presents the studies of the method for linking the surrogate parameters with the fluence introduced to the sensor.
+In the Sec. \ref{sec:surrogates-study} I present the studies of the method for linking the surrogate parameters with the fluence introduced to the sensor.
 
 
 \section{Intelligent pixel mask cluster tracking}
@@ -1082,18 +1076,12 @@ The two algorithms selected for this study fulfill this requirement.
 \subsection{Mask cluster features}
 
 After finding mask clusters for a given calibration (a one set of mask files), they can be characterised by a set of features.
-
 \begin{enumerate}
 \item \textbf{Position}  {$p_k$ = ($\bar{x_k}$, $\bar{y_k}$}), where $\bar{x_k} = \frac{\sum_{i}^{N^k}x_k^i}{N_k},
     \bar{y_k} = \frac{\sum_{i}^{N^k}y_k^i}{N_k}$.
-\item \textbf{Size} $s_k$ = \{$n_k$, $d_k$\} where $n_k$ is the number of pixels in a cluster divided by the mean number of the pixels in the given sensor's clusters. The $d_k = \frac{\sqrt{\sum_{i}^{N_k}(x_k^i - \bar{x_k})^2 - (y_k^i - \bar{y_k})^2}}{N_k}$ is a density of a cluster.
-
+\item \textbf{Size} $s_k$ = \{$n_k$, $d_k$\} where $n_k$ is the number of pixels in a cluster divided by the mean number of the pixels in the given sensor's clusters.
 \item \textbf{Shape} $h_k$ = \{$\alpha_k$, $c_k$\}, where $\alpha_k$ is the directional coefficient of the cluster measured by the fit to the line $y^k(x) = \alpha_k*x + b_k$. The $c_k$ is the roundness of the cluster calculated as it's Pearson Coefficient.
-
 \end{enumerate}
-
-
-
 With those metrics, we can then define the spacial characteristic vector as $v_k = [s_k; h_k]$. Then we define a cluster as a set of unique features $cluster_k = {p_k, v_k}$.
 
 \subsection{Mask cluster tracking}
@@ -1114,32 +1102,16 @@ Where $\Phi$ is defined as:
 and $ D_{i,j} $ is a distance matrix:
  \begin{equation}D_{i,j} = || p_j - p_i ||\end{equation}
 
-Also, the $V_{i,j}$ is a cosine similarity matrix:
-
-\begin{equation}
-V_{i,j} = \frac{v_i*v_j}{\lvert\lvert v_i \rvert\rvert*\lvert\lvert v_j \rvert\rvert}
-\end{equation}
-
-The index $i$ and $j$ are indeces of clusters in $t_{n-1}$ and $t_{n}$.
 The value $d_{min}$ is set to be a limiting factor. If the distance of centroids of the clusters stays the same, the value is 1., but as the distance approaches $d_{min}$, the value approaches 0.
 In the tests of the cluster tracking $d_{min}=10$ was used.
 The exemplary pairing of the clusters in consecutive simulation steps is visible in the Fig. \ref{fig:fin_clus} with it's similarity matrix calculation in Fig. \ref{fig:sims}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
-\begin{subfigure}[H]{0.51\textwidth}
-    \centering
-\includegraphics[width=\linewidth]{figures/chapter4/velopix_clusters/shape.png}
-\end{subfigure}
-\begin{subfigure}[H]{0.51\textwidth}
-    \centering
-\includegraphics[width=\linewidth]{figures/chapter4/velopix_clusters/distance.png}
-\end{subfigure}
-\begin{subfigure}[H]{0.51\textwidth}
-    \centering
-\includegraphics[width=\linewidth]{figures/chapter4/velopix_clusters/similarity.png}
-\end{subfigure}
-\caption{Rows represent clusters on image A in Figure ~\ref{fig:fin_clus}, columns represent clusters on image B in Figure ~\ref{fig:fin_clus}. Values indicate the Spacial Characteristics Similarity Measure \textit{V} (first plot), and Positional Similarity Measure \textit{$\Phi$} (second plot). The M matrix is the last plot.
+\includegraphics[width=0.3\textwidth]{figures/chapter4/velopix_clusters/shape.png}
+\includegraphics[width=0.3\textwidth]{figures/chapter4/velopix_clusters/distance.png}
+\includegraphics[width=0.3\textwidth]{figures/chapter4/velopix_clusters/similarity.png}
+\caption{Rows represent clusters on image A in Figure ~\ref{fig:fin_clus}, columns represent clusters on image B in Figure ~\ref{fig:fin_clus}. Values indicate the Spacial Characteristics Similarity Measure \textit{V} (left plot), and Positional Similarity Measure \textit{$\Phi$} (middle plot). The M matrix is the rightmost plot.
 }
 \label{fig:sims}
 \end{figure}
@@ -1280,11 +1252,11 @@ The test beam data contained multiple different types of sensors with different 
 Unfortunately, in the entire dataset, only one sensor (designated as S8) is suitable for studying the surrogate activation curves in function of particle fluence.
 This is due to the irradiation profile of the sensors and available raw data.
 Sensor S8 was the only one with a clear, non-uniform profile of the irradiation.
-For easier analysis and better statistics, we group the pixels into bins of simmilar level of fluence (Fig. \ref{fig:binning}).
+For easier analysis and better statistics, we group the pixels into bins of simmilar level of fluence.
 The S8 sensor was the only one that allowed for a binning of the sensor based on the amount of irradiation that the sensors were exposed to. The S8 is a 200 $\mu m$ thick, Hamamatsu n-on-p planar silicon pixel sensor that is virtually identical to the sensors used in the upgrade Velo detector construction. During the test beam experiment it was connected to the Timepix3 readout chip.
 %This sensor is Timepix3 W0009\_G08 with 200 μm n-on-p from Hamamatsu.
 %With 450 μm inactive edge, 35 μm implant width.
-Although other tested sensors featured uniform irradiation profile, we also investigated their activation curves. 
+Although other tested sensors featured uniform irradiation profile, nonetheless, we also investigated their activation curves. 
 The main strategy of the analysis was to study the properties of the surrogate function model's parameters distributions before and after the irradiation. 
 The respective distributions are presented in Figs. \ref{plot:sensor_surrogate_p1}  and \ref{plot:sensor_surrogate_p2}.
 The important feature, from the perspective of our analysis, is that for most of the sensors, the distributions of $p0$ and $p1$ parameters shifted to the left after the irradiation. This shift shows that those parameters are sensitive to the fluence.
@@ -1420,7 +1392,7 @@ $T$ parameter also shows large variance, with a visible overall decrease.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/chapter4/surrogates/Boxplot_vs_PDF.png}
+\includegraphics[width=0.8\textwidth]{figures/chapter4/surrogates/Boxplot_vs_PDF.png}
 \caption{A plot explaining the scope of the boxplot. The top plot represent the boxplot, with median in the middle. The range of the box spans from Quartile 1 to Quartile 3. The interquartile region (IQR) is the width of the box. The whiskers span from the edges of the box to length of 1.5 IQR to either side of the axis.
   The two bottom plots explain the ranges in terms of percentages and width of the distribution. Additionaly, an outlier is a value lying outside the both whiskers range. }
 \label{fig:boxplot}
@@ -1496,7 +1468,7 @@ In both cases we observe a similar spread of the curves, which is normal, since 
 %This is just to show that the surrogate function also changes in other way; the minimum charge required to create a $TOT$ signal is lower.
 %But for the majority of the charge range, it means that the sensitivity of the pixels has decreased, which should be expected of the silicon sensors after irradiation.
 
-Given this change in pixels behaviour after irradiation, we can inverse the problem as follows, by measuring the change in the surrogates' parameters before and after the irradiation, it might be possible to estimate the fluence based solely on the data coming from the sensor. One should stress, that this technique may be a major innovation in the field of the silicon radiation studies. So far only reliable methods of fluence estimations exists based only on Monte-Carlo modelling. Typically, the uncertainty of such modelling is assumed to be at least 100$\%$
+Given this change in pixels behaviour after irradiation, we can inverse the problem as follows, by measuring the change in the surrogates' parameters before and after the irradiation, it might be possible to estimate the fluence based solely on the data coming from the sensor. One should stress, that this technique may be a major innovation in the field of the silicon radiation studies. So far only unreliable methods of fluence estimations exists based only on Monte-Carlo modelling. Typically, the uncertainty of such modelling is assumed to be at least 100$\%$
 
 \subsection{Modelling the surrogate curves evolution in the fluence domain}
 

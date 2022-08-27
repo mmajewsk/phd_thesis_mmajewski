@@ -19,7 +19,7 @@ It was quickly discovered that the perceptron cannot be efficiently scaled to so
 Although the concept of multi-layer perceptron was already proposed, it lacked a viable way of training the parameters.
 This was later mitigated by the use of back-propagation as a method for training the parameters of the artificial neural networks.
 Back-propagation was popularised in the 1980s. This also coincides with a time of significant growth in interest in artificial intelligence.
-The popular trend was the usage of so-called ``expert systems'', which in reality were a set of predefined if-then statements built around expert knowledge.
+The primary trend was the usage of so-called ``expert systems'', which in reality were a set of predefined if-then statements built around expert knowledge.
 % https://towardsdatascience.com/history-of-the-second-ai-winter-406f18789d45
 Again, the hype for the AI and under-delivered solutions led to a cut in funding in research in this area and the ``second AI winter'', which lasted to about the second half of the first decade of the new Millenium.
 The significant development in computing power and the increased ability to create vast training data-sets allowed for the dynamic growth of this field of computer science that we observe to this day.
@@ -265,16 +265,17 @@ Sharpen & \includegraphics[scale=1, valign=c]{figures/chapter3/kernels/sharpen.p
 \subsubsection{Convolutional layer}
 
 A convolutional layer in a neural network is simply a layer that applies a convolutional filter. The properties of the filter, i.e. values of its elements, are learnable parameters.
-Usually, in the case of colour images, there are three layers of such filters (RGB), which outputs are summed as shown in Fig. \ref{fig:conv_layer}.
+Usually, in the case of colour images, there are three layers of such filters, which outputs are summed as shown in Fig. \ref{fig:conv_layer}.
 The values of the filters are trained by the backpropagation algorithm.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/chapter3/convo_steps.png}
+  \includegraphics[width=0.9\linewidth]{figures/chapter3/convo_steps.jpg}
   \caption{Step of application of a convolutional filter in a neural network \protect\footnotemark}
   \label{fig:conv_layer}
 \footnotetext{Source: \url{https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53}}
 \end{figure}
+% http://www.chizhouyu.com/entry/entry-20
 
 
 The application of the convolutional filters inside the neural network creates a map of more complex filters, which can extract the spacial features and build on other convolutional layers to learn the most valuable and significant features in a given task.
@@ -415,7 +416,7 @@ Finally, the softmax function is used because it limits the output to range from
 \begin{figure}
   \centering
   \includegraphics[width=0.9\linewidth]{figures/chapter3/vgg16.png}
-  \caption{Graphical representation of the VGG16 architecture.}
+  \caption[gvgg16]{Graphical representation of the VGG16 architecture.\footnote{Source: \url{https://paperswithcode.com/method/vgg}}}
   \label{fig:vgg16}
 \end{figure}
 
@@ -441,7 +442,7 @@ The above can be implemented using neural network layers and arbitrarily small $
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.6\linewidth]{figures/chapter3/Autoencoder_structure.png}
+  \includegraphics[width=0.5\linewidth]{figures/chapter3/Autoencoder_structure.png}
   \caption[autoenc]{Graphical representation of the autoencoder structure\footnotemark. }
   \label{fig:autoenc}
 \end{figure}
@@ -491,7 +492,7 @@ Recurrent neural networks can be divided into categories based on the input, out
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/chapter3/rnn_placeholder.png}
+  \includegraphics[width=0.9\linewidth]{figures/chapter3/RCNN2.jpg}
   \caption[recu]{Different recurrent neural networks, unrolled in time. The first example at the top is just a regular neural network. The second row represents a neural network which uses a single output and continuously produces output as many times as desired. The third row represents an inverted example when the network accumulates several different time step inputs and has a single output. This method can be helpful in sentiment analysis when a singular output marking sentiment is desired after a sequence of words.
   The fourth example depicts a RNN, which continuously produces output for each timestep. The last row shows that the number of inputs and outputs can be changed according to particular requirements\footnotemark. }
   \label{fig:recurrent_div}
@@ -584,12 +585,10 @@ And the custom activation function:
 
 \section{Deep Reinforcement learning}
 
-Many of the tasks in the real world do not have easy to define metrics and cannot follow input - output model of learning.
+Many of the tasks in the real world do not have easy do define metrics and cannot follow input - output model of learning.
 In some areas, a reward response is more straightforward to define than the exact desired output.
 An example of this may be a game of chess - it is hard to define what set of moves will win with a given opponent, and in the end, there is only a win-lose response.
-Such problems are solved with Reinforcement Learning (RL) \cite{Lapan18}.
-
-This section introduces reader to the crutial concepts behind the RL, which are proposed as a a possible solution for problem posed in Chapter \ref{chap:rl-lartpc}.
+Such problems are solved with Reinforcement Learning \cite{Lapan18}.
 
 \subsubsection{RL formalism's}
 \label{sec:rl_mdp}
@@ -689,7 +688,7 @@ This table can be iteratively filled by choosing the actions using the policy de
 \label{eq:Qlearning}
 \end{align}
 
-The last equation above is the key equation to the q-learning algorithm.
+The last equation above is the key equation begin the q-learning algorithm.
 This table can approximate the optimal solution to the given reinforcement learning problem.
 You can notice that the $Q$ should contain all of the different state-action pairs, which for many problems is not practical.
 This is where the Q-learning turns to the neural network's algorithms, as instead of using the $Q$ table, we can approximate $Q$ using a neural network.
@@ -702,7 +701,7 @@ This is where the Q-learning turns to the neural network's algorithms, as instea
 \subsection{Deep Q-Learning}
 \label{sec:dqn}
 
-Given that there exists an optimal bellman action-value function $Q^{*}(s',a')$ \cite{https://doi.org/10.48550/arxiv.1312.5602} and it's value in the next time-step is known, given all possibe actions  $a'$ in state $s'$, then the optimal strategy is to choose an action which maximises the expected value of future reward:
+Given that there exists an optimal bellman action-value function $Q^{*}(s',a')$ \cite{https://doi.org/10.48550/arxiv.1312.5602} and it's value in the next time-step given the state $s'$ and action $a'$ is known, then the optimal strategy is to select an action which maximises the expected value of future reward:
 
 \begin{align}
   Q^{*}(s,a) = E_{s' \sim \epsilon} \left[ r + \gamma \max_{a'} Q^{*}(s',a') \bigg| s,a \right]
@@ -732,7 +731,7 @@ Assuming MSE as our loss metric, we can write down loss function as follows:
 \mathcal{L} = (Q(s,a,\theta) - (r+\gamma\max_{a'}Q(s',a';\theta_{i-1d})))^{2}
 \end{align}
 
-This, in practice, creates a particular problem, as we need to process the states and the actions in the neural network Q twice, once to get the output that will be compared with the prediction and once to calculate future prediction. This creates a loop that can lead to the network's instability, as it will be chasing a target that is constantly changing. This is why usually, in practice, there are two separate networks. One for calculation of the (main network) $Q(s,a)$ and other for $Q(s',a')$ (usually called target network). Then, the target network is not trained but updated periodically with the weights from the main network.
+This, in practice, creates a particular problem, as we need to process the states and the actions in the neural network Q twice, once to get the output that will be compared with the prediction and once to calculate future prediction. This creates a loop that can lead to the network's instability, as it will be chasing a target that is constantly changing. This is why usually, in practice, there are two separate networks (target network), one for calculating the prediction and the other for calculating the output.
 
 \subsection{Experience replay buffer}
 
@@ -746,12 +745,11 @@ After a period of exploration (interaction with the environment), the training p
 There are multiple ways to implement a replay buffer, but one of the most common one is to create a limited length list (first in - last out), where the old samples are discarded.
 Then such a list is randomly sampled for the training cases.
 
-\subsection{Double Deep Q-Learning}
+\subsection{Deep Double Q-Learning}
 
 One of the problems of the DQN algorithms is over-optimistic value estimates.
-This is because when selecting the maximal value in the $\max_{a} Q(S_{t+1},a; \theta_{t})$ term we use one network pass to both choose (selecting the action of the max value), and calculate it's value (by returning only the maximum).
-The double DQN algorithm \cite{https://doi.org/10.48550/arxiv.1509.06461} aspires to solve this problem by using an additional step of the network (eq. \ref{eq:doubleQlearning}).
-This step wraps the $\max_{a} Q(S_{t+1},a; \theta_{t})$ into additional Q function.
+This is because when selecting the maximal value in the $\max_{a} Q(S_{t+1},a; \theta_{t})$ term we use one network pass to both choose (selecting the action of the max value), and calculating it's value (by returning only the maximum).
+The deep double q-learning algorithm \cite{https://doi.org/10.48550/arxiv.1509.06461} aspires to solve this problem by using an additional step of the network (eq. \ref{eq:doubleQlearning}).
 
 \begin{align}
  Y_{t}^{DoubleQ} =  R_{r+1} + \gamma Q(S_{t+1}, \max_{a} Q(S_{t+1},a; \theta_{t}); \theta'_{t})
@@ -762,7 +760,6 @@ This calculation of the target $Y$ is done using two sets of networks. Network $
 The values of $\theta'_{t}$ can be updated periodically with the weights of $\theta_{t}$.
 This can also be done using blending of the parameters $\theta'_{t+1} = \beta \theta'_{t} + (1-\beta)\theta_{t}$ wehere $0<\beta<1$.
 
-This should not be confused with the practice of using target and main network in Sec. \ref{sec:dqn}.
 \section{Probabilistic programming}
 %https://nbviewer.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb
 %https://pymcmc.readthedocs.io/en/latest/theory.html
@@ -776,9 +773,6 @@ This should not be confused with the practice of using target and main network i
 Probabilistic programming \cite{davidsonpilon2015probabilistic} was born out of the Monte Carlo simulations and Bayesian reasoning. In brief: it uses a probabilistic approach to modelling and machine learning.
 It is considered to be a white-box approach.
 Probabilistic programming uses Markov Chain Monte Carlo (MCMC) to sample probability distribution function.
-
-The probabilistic programming is later proposed for anomaly analysis in Section \ref{chap4:outlierness}, and this section aims to gently introduce the reader to this topic.
-
 
 
 \subsection{Metropolis-Hastings algorithm example}
@@ -805,12 +799,12 @@ In the case of machine learning tasks, we have data to test our beliefs, and so 
 
 For this purpose we can say that the following approximation is true:
 \begin{align}
-f(d_{i} | \theta) \approx P(D|\theta)
+f(x_{i} | \theta) \approx P(D|\theta)
   \end{align}
 
 The Metropolis-Hastings method uses a transition model $Q(\theta'|\theta)$ to generate candidates for the searched parameter $\theta$.
 In this algorithm, $Q$ is used for creating random steps $\theta$ in the distribution space.
-For example $Q$ can be defined as $Q(\theta'|\theta)=N(\theta, \mu)$ and $\mu=1$. Such definition is in essence a random walk algorithm.
+For example $Q$ can be defined as $Q(\theta'|\theta)=N(\theta, \mu)$ and that $\mu=1$ - a random walk.
 With each step, we assess if the new position $\theta'$ is more likely to fit the distribution.
 If it is not, we discard the newly generated position and sample again.
 Each step is directly influenced only by the previous step, which means it satisfies the Markov chain rule.
@@ -842,16 +836,10 @@ The eq. \ref{eq:acceptance} means that we will accept new $\theta^{\prime}$ if t
 The steps of the Metropolis-Hastings algorithm can be described as the pseudo-code in Listing \ref{alg:metropolis}.
 The first step is to generate random $\theta$. Then, we generate $\theta\prime$, and calculate the probability of belonging to the distribution for $\theta$ and $\theta\prime$. Then we use the acceptance rule to either accept or reject $\theta\prime$ as new $\theta$. Those steps are repeated $k$ times.
 
-The process described in the listing \ref{alg:metropolis} creates a ``trace'' of candidate $\theta$ parameters, as visualised in Figure \ref{fig:random_walk}.
-
-% How to center algorithm
-%\begin{figure}[ht]
-%  \centering
-%  \begin{minipage}{.4\linewidth}
 
 \begin{algorithm}[ht]
-\caption{Steps of Metropolis-Hastings algorithm }
-\label{alg:metropolis}
+  \caption{Steps of Metropolis-Hastings algorithm }
+  \label{alg:metropolis}
 \KwData{$\theta \gets random$}
 \For{$k \in \{1,\dots,K\}$}{
 
@@ -870,20 +858,12 @@ The process described in the listing \ref{alg:metropolis} creates a ``trace'' of
 }
 \end{algorithm}
 
-%  \end{minipage}
-%  \begin{algorithm}[H]
-%    \caption{Steps of Metropolis-Hastings algorithm }
-%  \label{alg:metropolis}
-%  \end{algorithm}
 
-%\end{figure}
+The process described in the listing \ref{alg:metropolis} creates a ``trace'' of candidate $\theta$ parameters, as visualised in Figure \ref{fig:random_walk}.
 
-
-
-
-\begin{figure}[ht]
+\begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/chapter3/random_walk.png}
+  \includegraphics[width=0.9\linewidth]{figures/chapter3/random_walk.pdf}
   \caption{ Exemplary steps of Metropolis-Hastings steps. In this example, the target distribution is $\mathcal{N}(\mu=0, \sigma=3)$. The accepted values are in blue, and the red crosses are rejects.}
   % source: assets/random_walk
   \label{fig:random_walk}
@@ -916,7 +896,7 @@ Then, these parameters can be used in the assumed underlying properties and dist
 \section{Clustering}
 \label{sec:clustering}
 
-In the general case, clustering is a process of grouping unlabeled data points into clusters that segregate cases with similar traits. There are many different clustering algorithms, each with its own preferred use case. In this section, I will present the most basic algorithm known as the K-means and two algorithms used in the later chapters. All of the presented algorithms are available as a part of the scikit-learn \cite{scikit-learn} package.
+In the general case, clustering is a process of grouping unlabeled data points into clusters that segregate cases with similar traits. There are many different clustering algorithms, each with its own preferred use case. In this section, I will present the most basic algorithm known as the K-means and two algorithms used in the later chapters. All of the presented algorithms are implemented as a part of the scikit-learn \cite{scikit-learn} package.
 
 \subsection{K-means}
 
@@ -926,7 +906,6 @@ The algorithm can be initialised by picking $k$ data points randomly, and treati
 Then, for the remaining data points the distance to each of the centroids is calculated $|x_{i} - m_{k}|$.
 Data points are assigned to the nearest centroids, and the set of the points assigned to each centroid creates a cluster.
 The last step of the algorithm is to recalculate the centroids $m^{(t+1)}_k = \frac{1}{\left|S^{(t)}_k\right|} \sum_{x_j \in S^{(t)}_i} x_j $
-In practice, this means that the space of the dataset is divided by lines equidistant from the centroids.
 
 % https://scikit-learn.org/stable/modules/clustering.html#k-means
 
@@ -964,7 +943,7 @@ The steps of the algorithm can be described as follows:
 \begin{enumerate}
 \item The algorithm starts by choosing an arbitrary point $p$ in the dataset.
 \item First, the neighbouring points $q$ that satisfy $ distance(p,q) < \epsilon$ are pushed onto the stack for further processing.
-\item If the number of points $q$ is equal or greater than $MinPts$, then the point $p$ is considered to be a ``core point'', and is assigned to the current cluster.
+\item If the number of $q$ is equal or greater than $MinPts$, then the point $p$ is considered to be a ``core point'', and is assigned to the current cluster.
 \item If that number is lower than $MinPts$, but one of those points is the core point, then $p$ is the border point and also is assigned to the current cluster.
 \item If none of the above applies, then $p$ is labelled as ``noise''.
 \item The process repeats by popping the stack and getting new $p$.
@@ -982,7 +961,7 @@ In this sense, we can say that any two points in a cluster are density connected
 % https://livebook.manning.com/book/machine-learning-for-mortals-mere-and-otherwise/chapter-18/65
 % https://towardsdatascience.com/understanding-optics-and-implementation-with-python-143572abdfb6
 
-The OPTICS \cite{10.1145/304182.304187, rhys2020machine} algorithm can be thought of as an extension of the DBSCAN, as by itself, it only provides a way of ordering points without assigning them to clusters.
+The OPTICS \cite{10.1145/304182.304187, rhys2020machine} algorithm can be thought of as an extension of the DBSCAN, although by itself, it only provides a way of ordering points without assigning them to clusters.
 OPTICS requires only the minimum number of neighbouring points with respect to a core point $MinPts$, and the maximum allowed distance for a core point $\epsilon_{max}$ is optional but can speed up calculations.
 It introduces two important notions:
 
