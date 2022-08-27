@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{storck} \PYG{n}{client} \PYG{k+kn}{import} \PYG{n+nn}{StorckClient}
+
+\PYG{n}{client} \PYG{o}{=} \PYG{n}{StorckClinet}\PYG{p}{(}\PYG{n}{api\PYGZus{}host}\PYG{o}{=...}\PYG{p}{,} \PYG{n}{user\PYGZus{}token}\PYG{o}{=...}\PYG{p}{,} \PYG{n}{workspace\PYGZus{}token}\PYG{o}{=...}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{client}\PYG{o}{.}\PYG{n}{get\PYGZus{}files}\PYG{p}{())}
+\end{Verbatim}

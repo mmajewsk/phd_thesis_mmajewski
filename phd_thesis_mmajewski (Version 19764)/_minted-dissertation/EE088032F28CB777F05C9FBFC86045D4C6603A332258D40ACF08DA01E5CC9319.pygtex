@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{titania.web.base\PYGZus{}tab} \PYG{k+kn}{import} \PYG{n}{WebMetaclass}
+
+\PYG{k}{class} \PYG{n+nc}{WeatherWeb}\PYG{p}{(}\PYG{n}{Weather}\PYG{p}{,} \PYG{n}{metaclass}\PYG{o}{=}\PYG{n}{WebMetaclass}\PYG{p}{):}
+    \PYG{k}{pass}
+\end{Verbatim}
