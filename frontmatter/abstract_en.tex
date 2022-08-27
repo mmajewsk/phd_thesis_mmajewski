@@ -1,0 +1,112 @@
+This work brings together multiple projects revolving around particle detectors and novel applications of computational intelligence for many of their problems.
+As an expert and enthusiast of AI, my main focus of the study is the application of machine learning methods for particle detectors.
+The core of this document relates to the LHCb spectrometer and its Vertex Locator detector.
+The LHCb is part of the Large Hadron Collider system of detectors', and its discoveries contributed to the global understanding of physics.
+The two data-taking periods, Run 1 (2011-2012) and Run 2 (2015-2018), sum to the integrated luminosity of around $9fb^{-1}$.
+Technical stop (after Run 2) brought and upgraded the detector, migrating to the pixel-based matrices.
+The unique requirements and conditions in which the Velo detector is required to perform require individual research for the methods of monitoring and analysis of the state of the sensor, which is presented in this work.
+
+The beginning chapters, up to and including Chapter \ref{chap:ml}, contain the necessary theoretical and technical introduction to the details of the physics goals, detector composition and analysis methods.
+The chapters touching on the unique analysis of the calibration of the Velo detector in Runs 1 and 2 are contained in Chapter \ref{chap:ml-velo}, and the study of the upgraded detector is contained in Chapter \ref{chap:ml-velo-pix}.
+
+The first portion of the presented studies investigates two calibration parameters derived from the noise signal picked up by the detector's silicon sensors, pedestal (mean of noise) and threshold (standard deviation of the noise). Those parameters are investigated in views of different dimensionalities.
+The analysis of the trend of the pedestals has shown no persisting effects, which confirms that the adaptation of the voltage fed to the detector was in acceptable ranges.
+The analysis of the threshold parameters revealed the effects of the harmful radiation on the sensors. It inspired the creation of a novel machine learning-based algorithm for the assessment of the calibration itself.
+I created and implemented an algortihm called ``outlierness'' and successfully introduced it to the monitoring of the Velo detector in 2018.
+
+The high dimentionality of the problem (vast amount of unique sensor strips) led to the tests of dimentionality reduction algorithms (PCA and autoencoder) and showed that both algorithms could show outliers in the functioning of the detector.
+The subtle shifts in the relation of the calibration to the noise found in the detector during data taking led us to leverage that effect and use a recurrent neural network to find a method for predicting the need for the calibration of the detector.
+
+The new Velo detector in the upcoming run 3 uses pixel matrices for the data taking and increases the number of individual sensors even further.
+I participated in the creation of a novel method for finding and tracking clusters of masked pixels in its calibration, which will allow for a more informed decision about detector maintenance.
+
+While most of the helpful methods for analysing the calibration of the detector can only be used while the detector is already fully commissioned and functioning, the test data of the sensors can be used for studying the effects of the radiation.
+The new VeloPix sensor registers a time-over-threshold signal, which can be linked with the energy deposited in the sensor expressed in $eV$ via surrogate function. 
+The change of surrogate parameters is linked with the amount of total radiation delivered to the sensor. I studied this effect, which led to the development of the breakthrough intelligent method for assessing the fluence of the sensor.
+
+The experience of working with Velo has led to developing the necessary and novel solutions to practical problems presented in Chapter \ref{chap:software}.
+The experience of working with the calibration data has led to the creation web-based database service called Storck, which is undergoing the introduction to the LHCb systems during the commissioning of the detector.
+Along with the database system, an open source framework for efficient creation of the monitoring tools - Titania is presented.
+Storck and Titania are generic open-source tools that can be used independently in any experiment.
+I led the development of both  projects, along with several developers.
+
+The applications of the machine learning methods for the High Energy Physics detectors usually show high specificity and customisation to the undergoing physics search and design of the detector.
+While it is usually necessary to develop solutions to particular problems, the problem of tracking and particle identification can be thought of as more universal.
+The work in generalising machine learning algorithms for particle physics experiments has been largely untouched.
+The large and robust open dataset created by DeepLearnPhysics has created an opportunity for early search for a more general AI capable of understanding the rules of our universe.
+The opportunity was leveraged by an ambitious attempt to research the reinforcement learning method's application for particle tracking and identification in the LARTPC dataset.
+This research is presented in Chapter \ref{chap:rl-lartpc}, with a theoretical introduction in Chapter \ref{sec:neu_dec}.
+
+Additionally to the research work, my duties included conducting AGH course Python in the Enterprise. Throughout the years, I taught a total sum of around 250 students how to write clean, good, reliable pythonic code and provided guidance for their course-related projects. The students also learned how to use the GIT version control system and how to collaborate with other students on projects using Agile software development, Scrum, Continuous Integration and Deployment tools, as well as how to apply machine learning to real-world engineering problems.
+
+Below is the list of the contributed papers, as well as conference and schools participation.
+
+
+\section*{Publications}
+\begin{itemize}
+
+  %%\item \textbf{title},
+    %%    \\ text
+  \item \textbf{Analysis, and machine learning anomaly detection of the VELO-LHCb calibration},
+        \\ Journal of Physics: Conference Series, 2nd Trans-Siberian School on High Energy Physics, 1-5 April 2019 (\href{https://doi.org/10.1088/1742-6596/1337/1/012006}{proceedings})
+
+  \item \textbf{Automatised data quality monitoring of the LHCb Vertex Locator},
+        \\ Journal of Physics: Conference Series (2017) 2017 J. Phys.: Conf. Ser. 898 092046
+
+  \item \textbf{Development of the LHCb VELO monitoring software platform},
+        \\ Acta Phys. Pol. B 48, 1061 (2017)
+
+  \item \textbf{Mapping the material in the LHCb vertex locator using secondary hadronic interactions},
+        \\ 2018 JINST 13 P06008
+
+  \item \textbf{Phase I Upgrade of the Readout System of the Vertex Detector at the LHCb Experiment},
+        \\ IEEE Trans. Nucl. Sci. 67 (2020) 732-739
+
+  \item \textbf{The upgrade I of LHCb VELO—towards an intelligent monitoring platform},
+        \\ 2020 JINST 15 C06009
+
+  \item \textbf{Software Platform for the Monitoring and Calibration of the LHCb Upgrade I Silicon Detectors},
+        \\ Acta Phys. Pol. B 50, 1087 (2019)
+
+  \item \textbf{Simulation and Optimization Studies of the LHCb Beetle Readout ASIC and Machine Learning Approach for Pulse Shape Reconstruction},
+        \\ Sensors 2021, 21(18), 6075;
+  \item \textbf{Readout Firmware of the Vertex Locator for LHCb Run 3 and Beyond},
+        \\ IEEE Trans. Nucl. Sci. 68 (2021)
+  \item \textbf{Radiation Damage Effects and Operation of the LHCb Vertex Locator},
+        \\ IEEE Trans. Nucl. Sci. 65 (2018)
+  \item \textbf{Phase I Upgrade of the Readout System of the Vertex Detector at the Experiment},
+        \\ IEEE Trans. Nucl. Sci. 67 (2020)
+\end{itemize}
+
+\section*{Conferences}
+
+\begin{itemize}
+  \item \textbf{Development of the LHCb VELO monitoring software platform},
+        \\ 23rd Cracow Epiphany Conference, Kraków, 9 - 12 Jan 2017
+        (
+        \href{http://dx.doi.org/10.5506/APhysPolB.48.1061}{proceedings}
+        );
+  \item \textbf{A TCAD based model of double metal layer effects and a review of the radiation damage and monitoring of LHCb Velo},
+        \\ 13th "Trento"  workshop on Advanced silicon radiation detectors, 19-21 February 2018, Munich;
+  \item \textbf{Machine Learning in High Energy Physics},\\ Data Science Summit, Warsaw, 14 June 2019
+    \item \textbf{Machine Learning in LHCb},\\ML in PL, Warsaw, 22–24 November 2019 (\href{http://docs.mlinpl.org/conference/2019/posters/MaciejMajewski.pdf}{poster})
+    \item \textbf{Machine Learning in Velo LHCb monitoring and calibration in Run I and II.},\\Symposium Artificial Intelligence for Science, Industry and Society, Mexico, 20-25 October 2019
+    %%\item \textbf{Title},\\PyHEP 
+    \item \textbf{LHCb Velo upgrade software platform},\\10th LHC students poster session, Geneva, CERN, 19 Febuary 2020
+    \item \textbf{Unsupervised learning for pixel mask clustering and cluster tracking
+in LHCb’s Velopix sensor calibration} - \underline{awarded best talk in young researchers session} \\4th Jagiellonian Symposium on Advances in Particle Physics and Medicine, Kraków, 10-15 July 2022 (proceedings)
+
+\end{itemize}
+
+\section*{Schools}
+\begin{itemize}
+    \item \textbf{Machine Learning in High Energy Physics Summer School},\\ Oxford, 5–12 August 2018
+    \item \textbf{2nd Trans-Siberian School on High Energy Physics},\\ Tomsk, 1-5 April 2019
+    \item \textbf{42nd CERN School of Computing},\\ Cluj-Napoca, Romania, 15-28 September, 2019
+    \item \textbf{5th International Winter School on Big Data},\\ Cambridge, 7-11 January 2019
+\end{itemize}
+
+\section*{Grants}
+\begin{itemize}
+    \item \textbf{Intelligent monitoring software and tests of silicon pixel sensors for the modernized peak detector in the LHCb experiment.} - principal investigator,\\ Preludium 14, National Science Center (NCN), 2018-2020
+\end{itemize}
