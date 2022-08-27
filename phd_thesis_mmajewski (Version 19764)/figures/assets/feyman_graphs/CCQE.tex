@@ -1,0 +1,9 @@
+\documentclass[crop,tikz, border=10pt]{standalone}% 'crop' is the default for v1.0, before it was 'preview'
+\usepackage[compat=1.1.0]{tikz-feynman}
+\begin{document}
+\feynmandiagram [vertical=a to b] {
+  u1 [particle=\(\bar{\nu}\)] -- [fermion] a -- [fermion] i2 [particle=\(\mu^{+}\)],
+  a -- [boson, edge label=\(W^{-}\)] b,
+  f1 [particle=\(p\)] -- [anti fermion] b -- [anti fermion] f2 [particle=\(n\)],
+};
+\end{document}

@@ -29,6 +29,7 @@
 	% \listoffigures % optional
 	\dedicationpage
 	\acknowledgments
+	\authorcontribution
 }
 
 \renewcommand{\maketitle}{
@@ -49,6 +50,7 @@
 	\@degreemonth\ \@degreeyear}
 	\end{center} \vspace*{\fill}
 }
+
 
 \newcommand{\copyrightpage}{
 	\newpage
@@ -91,6 +93,16 @@
 	\noindent
 	\input{frontmatter/thanks}
 	\vspace*{\fill} \newpage
+	\setcounter{page}{11}
+	\pagenumbering{arabic}
+}
+
+\newcommand{\authorcontribution}{
+	\chapter*{Author's Contribution}
+	\noindent
+	\input{frontmatter/authorcontribution}
+	\vspace*{\fill} \newpage
 	\setcounter{page}{1}
 	\pagenumbering{arabic}
+	\pagestyle{fancy}
 }

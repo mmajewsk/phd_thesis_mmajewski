@@ -77,7 +77,9 @@
 \onehalfspacing
 %\raggedright
 \parindent 12pt
-\RequirePackage{mathspec}
+
+\RequirePackage{mathspec}%
+
 
 % use Arno Pro instead of standard LaTeX fonts
 \setmathsfont(Digits,Latin,Greek)[
@@ -123,7 +125,7 @@ BoldItalicFont=ArnoPro-BoldItalic
 %								figurewithin=chapter,
 %								tablewithin=chapter]{caption}
 \RequirePackage[labelfont={sf,bf,small},textfont={sf,small},justification=RaggedRight,margin=0pt, figurewithin=section, tablewithin=section]{caption}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \onehalfspacing
 %\doublespacing
@@ -137,18 +139,24 @@ BoldItalicFont=ArnoPro-BoldItalic
 \renewcommand{\abstractpage}{
 	\newpage
 	\pagenumbering{roman}
-	\setcounter{page}{6}
+	\setcounter{page}{5}
 	\pagestyle{fancy}
-	\lhead{Thesis advisor: \@advisor} \rhead{\@author}
+	% \lhead{Thesis advisor: \@advisor} \rhead{\@author}
 	\renewcommand{\headrulewidth}{0.0pt}
 	\begin{center}
 	\vspace*{1pt}
 	\Large \textcolor{SchoolColor}{\textit{Application of machine learning methods for the analysis of the calibration of the LHCb VELO detector, studies of irradiated silicon pixel sensors and reconstruction of the neutrino interaction in LARTPC detector}} \normalsize\\
 	\vspace*{15pt}
-	\sc Streszczenie \\ \rm
+	\sc Abstract (Polish Version) \\ \rm
 	\end{center}
 	\doublespace %Harvard registrar requests that abstract is double spaced
 	\input{frontmatter/abstract}
+
+	\doublespace %Harvard registrar requests that abstract is double spaced
+	\begin{center}
+    \sc Abstract (English Version) \\ \rm
+	\end{center}
+	\input{frontmatter/abstract_en}
 	\doublespace %Harvard registrar requests that abstract is double spaced
 	\newpage \lhead{} \rhead{}
 	\cfoot{\thepage}
@@ -170,7 +178,7 @@ BoldItalicFont=ArnoPro-BoldItalic
     \newpage}
 
 \renewcommand{\maketitle}{
-\newgeometry{hmargin={2cm, 2cm}, height=10.0in}     % use whatever margins you want for left, right, top and bottom.
+\newgeometry{hmargin={2cm, 2cm}, height=10.0in, left=3.5cm, right=1.5cm}     % use whatever margins you want for left, right, top and bottom.
 
 \thispagestyle{empty}
 %% ------------------------ NAGLOWEK STRONY ---------------------------------
@@ -217,13 +225,12 @@ BoldItalicFont=ArnoPro-BoldItalic
 
 %% =====  TYL STRONY TYTULOWEJ PRACY DOKTORSKIEJ====
 \thispagestyle{empty}
-
+\setcounter{page}{3}
 \vspace*{4ex}\noindent {\textbf{Declaration of the author of this dissertation:}}\\[2pt]
 Aware of legal responsibility for making untrue statements I
 hereby declare that I have written this dissertation myself and
 all the contents of the dissertation
 have been obtained by legal means.\\[8pt]
-
 \vspace*{4ex}
 
 
@@ -233,6 +240,7 @@ have been obtained by legal means.\\[8pt]
 This dissertation is ready to be reviewed.
 \\[8pt]
 \newpage
+
 \thispagestyle{empty}
 \ % The empty page
 

@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{panels.weather\PYGZus{}panel} \PYG{k+kn}{import} \PYG{n}{WeatherControlPanel}
+\PYG{k+kn}{from} \PYG{n+nn}{data.weather\PYGZus{}data} \PYG{k+kn}{import} \PYG{n}{WeatherData}
+\PYG{k+kn}{from} \PYG{n+nn}{plots.weather\PYGZus{}plot} \PYG{k+kn}{import} \PYG{n}{WeatherPlot}
+\PYG{k+kn}{from} \PYG{n+nn}{titania.QtGUI.base\PYGZus{}tab} \PYG{k+kn}{import} \PYG{n}{QtBaseLayoutTab}
+
+\PYG{k}{class} \PYG{n+nc}{WeatherGUI}\PYG{p}{(}\PYG{n}{QtBaseLayoutTab}\PYG{p}{):}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{parent}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{):}
+        \PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n}{data}\PYG{o}{=}\PYG{n}{WeatherData}\PYG{p}{(),} \PYG{n}{parent}\PYG{o}{=}\PYG{n}{parent}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{make\PYGZus{}plot}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{WeatherPlot}\PYG{p}{(}\PYG{n}{parent}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{parent}\PYG{p}{,} \PYG{n}{view}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{)}
+
+    \PYG{k}{def} \PYG{n+nf}{get\PYGZus{}title}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{l+s+s2}{\PYGZdq{}Weather Plot\PYGZdq{}}
+
+    \PYG{k}{def} \PYG{n+nf}{create\PYGZus{}control\PYGZus{}panel}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{WeatherControlPanel}\PYG{p}{(}\PYG{n}{widget}\PYG{o}{=}\PYG{n+nb+bp}{self}\PYG{p}{)}
+\end{Verbatim}

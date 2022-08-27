@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+ProjectName
+|── data/
+|── panels/
+|── plots/
+|── views/
+|── main.py
+|── config.py
+\end{Verbatim}
