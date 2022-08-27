@@ -4,6 +4,10 @@ https://fonts.google.com/specimen/EB+Garamond
 and also running it with xelatex
 
 
+Ubuntu 20.04
+sudo apt-get install -y texlive-bibtex-extra texlive-science texlive-xetex
+sudo apt-get install texlive-full
+
 * Backlog
 ** TODO get arxiv access
 * Doing
@@ -25,3 +29,17 @@ and also running it with xelatex
 - http://fizyka.agh.edu.pl/doktoraty/fulek_rozprawa.pdf
 ** Introduction
   https://en.wikipedia.org/wiki/Theory_of_everything
+
+
+* LARTPC notes:
+TPC : https://en.wikipedia.org/wiki/Time_projection_chamber
+
+References about LARTPC from pilarnet (https://arxiv.org/pdf/2006.01993.pdf) paper:
+https://www.sciencedirect.com/science/article/abs/pii/S0168900204004966?via%3Dihub
+https://iopscience.iop.org/article/10.1088/1748-0221/12/02/P02017
+https://arxiv.org/abs/1503.01520
+https://arxiv.org/abs/1601.02984
+
+* Simulation research notes
+Main source of intel: https://github.com/DeepLearnPhysics/Blog
+https://github.com/DeepLearnPhysics/lartpc_mlreco3d - pipeline ?

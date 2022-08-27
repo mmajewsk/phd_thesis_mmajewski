@@ -1,4 +1,58 @@
-\chapter{Conclusion}
-\label{conclusion}
+\chapter{Conclusions}
 
-Lorem ipsum
+
+This thesis combines multiple projects oriented around machine learning and software applications for high-energy physics detectors.
+
+The projects related to Velo in runs 1 and 2 started with analysing the calibration data. This analysis inspired other projects and validation of detector maintenance.
+The essential information acquired in this process is that properly controlling the bias voltage and other factors have primarily protected the detector from continuous radiation damage. 
+
+Importantly Pedestal calibration parameter has shown no overall trend.
+Some of the effects stemming from the manufacturing of the sensors (faulty channels and coupling to the digital clock line), as well as the progression of the masked channels in time, have been noticed and discussed. Overall, these effects were expected to be found.
+
+Another insight was that the Threshold parameters, which play a crucial role in hit detection, are prone to improper calibration. 
+Such essential factor needs are guarded with care. 
+That need has evolved into an anomaly detecting algorithm that is capable of early assessment of the calibration. 
+This novel "outlierness" algorithm was created using probabilistic programming and was capable of noticing anomalies and fluctuations in the calibration. The algorithm presented in the thesis was developed and deployed successfully within the Lovell monitoring framework in 2018.
+
+Velo detector has a large number of individual channels (about 170 000 strips), which will be only increased in Run 3 (about 3 500 000 pixels).
+This makes it impossible for a human to assess the state of the detector at one glance. Hardships in visualising such high dimensional data led to an investigation of the dimentionality reduction methods (PCA and autoencoder), which have shown promise in conveying crucial insights from the calibrations.
+
+Calibration is vital for the detector and demands special conditions (no-beam).
+The beam at LHC is centrally steered and shared with other experiments. 
+Thus scheduling of calibration must be deliberate.
+The comparison of the noise read out in during beam collisions and the Threshold parameters have shown a connection. 
+In this unique study, a recurrent neural network model capable of predicting the need for calibration can help with the scheduling.
+
+
+
+Although testing the application of the methods developed for the Velo in Run 1 and 2 on the Velo in Run 3 is impossible (as it is still in commissioning), this presents studies for the VeloPix, based on the insights from the test beam.
+
+The VeloPix sensor was made to be a careful eye that will recognise the particles passing through and reconstruct their path.
+However, this eye can have blind spots due to the masked pixels.
+The study presented in this thesis utilises a simulation of VeloPix masked pixels to devise a breakthrough method for associating the clusters of the masked pixels throughout the calibration.
+The methods utilise a similarity matrix made of custom cluster features and tests both DBSCAN and OPTICS for clustering.
+The resulting algorithm (using DBSCAN) shows $76\%$ of accuracy in cluster recognition.
+
+One of the key metrics for monitoring the detector is the fluence level.
+The methods used so far, which include the geometry simulation, are not trivial in calculation and are burdened with low precision.
+The study of the relationship between the surrogate function parameters and the fluence in the test beam data has shown a correlation. 
+This opens a door for a novel method of assessing the fluence levels experienced by the sensor.
+We present an approximation of this relationship as a polynomial fit.
+
+
+An experience of close work with the detector calibration has led to the creation of a framework solution to two of the challenges of maintaining the detector: calibration monitoring and calibration data storage.
+The Titania framework helps to navigate the obstacles created by the monitoring tasks.
+It enforces structured writing of the code needed for plotting and exploring the data.
+The Storck database system solves the other problem: calibration data storage.
+Simple disk space on the filesystem has proved to be a not sufficient way of storing calibration data. 
+This kind of data requires a structure, and it is a description while not limiting the end user to any type of data.
+The Storck project provides all of those features and is being deployed along the commissioning works for the upcoming Run 3.
+Both of the projects were created using an open-source MIT licence.
+
+
+The last project in this thesis diverges from the LHCb and touches the LARTPC detector.
+It is an innovative approach to the problem of tracking and particle identification of neutrino-induced processes in the LARTPC detector simulation using Reinforcement Learning. 
+It presents an environment interface for experimentation and implementation of the Reinforcement Learning based methods, along with the neural network model (DDQN) for baseline solution.
+This study shows that this approach is a viable choice for further investigation in this area.
+
+
