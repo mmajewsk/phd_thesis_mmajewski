@@ -1,29 +1,29 @@
-This work brings together multiple projects revolving around particle detectors and novel applications of computational intelligence for many of their problems.
-As an expert and enthusiast of AI, my main focus of the study is the application of machine learning methods for particle detectors.
-The core of this document relates to the LHCb spectrometer and its Vertex Locator detector.
-The LHCb is part of the Large Hadron Collider system of detectors', and its discoveries contributed to the global understanding of physics.
-The two data-taking periods, Run 1 (2011-2012) and Run 2 (2015-2018), sum to the integrated luminosity of around $9fb^{-1}$.
-This levele of irradiation creates tremendous challenges in detector upkeep.
-Technical stop (after Run 2) brought and upgraded the detector, migrating to the pixel-based matrices.
-The unique requirements and conditions in which the Velo detector is required to perform require individual research for the methods of monitoring and analysis of the state of the sensor, which is presented in this work.
+This work brings together multiple topics revolving around particle detectors and novel applications of computational intelligence to enhance analysis of data produced by them.
+As an expert and enthusiast of AI, my main focus of the study is the application of machine learning methods for solving problems in the field of high energy particle detectors.
+The core of this document relates to the LHCb spectrometer and its high precision silicon Vertex Locator detector both in original strip version and upgraded pixel version.
+The LHCb is a part of the Large Hadron Collider system of detectors', and its discoveries contributed to the global understanding of fundamental physics.
+The two data-taking periods, Run 1 (2011-2012) and Run 2 (2015-2018), collected data samples with integrated luminosity of around $9fb^{-1}$. Operating the silicon detectors in such intense radiation field leads to the radiation damage issues. Radiation damage and increased luminosity of LHC are two reasons behind necessity of upgrading the initial design for upcoming LHC Run 3 and 4.
 
-The beginning chapters, up to and including Chapter \ref{chap:ml}, contain the necessary theoretical and technical introduction to the details of the physics goals, detector composition and analysis methods.
-The chapters touching on the unique analysis of the calibration of the Velo detector in Runs 1 and 2 are contained in Chapter \ref{chap:ml-velo}, and the study of the upgraded detector is contained in Chapter \ref{chap:ml-velo-pix}.
+
+The unique requirements and conditions in which the Velo detector must operate requires an extensive research phase releated not only to hardware studies but also for the new methods of monitoring and analysis of the state of the detector. The latter is presented in this thesis.
+
+The starting chapters, up to Chapter \ref{chap:ml}, contain the fundamental theoretical and technical introduction to the details of the physics goals, detector composition and analysis methods.
+The unique analysis of the calibration of the Velo detector in Runs 1 and 2 is described in Chapter \ref{chap:ml-velo}, and the study of the upgraded detector is contained in Chapter \ref{chap:ml-velo-pix}.
 
 The first portion of the presented studies investigates two calibration parameters derived from the noise signal picked up by the detector's silicon sensors, pedestal (mean of noise) and threshold (standard deviation of the noise). Those parameters are investigated in views of different dimensionalities.
 The analysis of the trend of the pedestals has shown no persisting effects, which confirms that the adaptation of the voltage fed to the detector was in acceptable ranges.
 The analysis of the threshold parameters revealed the effects of the harmful radiation on the sensors. It inspired the creation of a novel machine learning-based algorithm for the assessment of the calibration itself.
 I created and implemented an algortihm called ``outlierness'' and successfully introduced it to the monitoring of the Velo detector in 2018.
 
-The high dimentionality of the problem (vast amount of unique sensor strips) led to the tests of dimentionality reduction algorithms (PCA and autoencoder) and showed that both algorithms could show outliers in the functioning of the detector.
+The high dimentionality of the problem (large number of individual sensor readout channels) led to tests of dimentionality reduction algorithms (PCA and autoencoder) and showed that both algorithms could reveal anomalies in the functioning of the detector.
 The subtle shifts in the relation of the calibration to the noise found in the detector during data taking led us to leverage that effect and use a recurrent neural network to find a method for predicting the need for the calibration of the detector.
 
-The new Velo detector in the upcoming run 3 uses pixel matrices for the data taking and increases the number of individual sensors even further.
-I participated in the creation of a novel method for finding and tracking clusters of masked pixels in its calibration, which will allow for a more informed decision about detector maintenance.
+The new Velo detector in the upcoming Run 3 exploits pixel matrices for the data taking and increases the number of individual channels more that two order of magnitude.
+I participated in the creation of a novel method for finding and tracking clusters of masked (faulty) pixels, using calibration data stream, which will allow for a more informed decision about detector maintenance.
 
 While most of the helpful methods for analysing the calibration of the detector can only be used while the detector is already fully commissioned and functioning, the test data of the sensors can be used for studying the effects of the radiation.
 The new VeloPix sensor registers a time-over-threshold signal, which can be linked with the energy deposited in the sensor expressed in $eV$ via surrogate function. 
-The change of surrogate parameters is linked with the amount of total radiation delivered to the sensor. I studied this effect, which led to the development of the breakthrough intelligent method for assessing the fluence of the sensor.
+The change of the function parameters is linked with the amount of total radiation delivered to the sensor. I studied this effect, which led to the development of the basis for breakthrough intelligent method for assessing the fluence of the sensor.
 
 The experience of working with Velo has led to developing the necessary and novel solutions to practical problems presented in Chapter \ref{chap:software}.
 The contact with the calibration data has led to the creation web-based database service called Storck, which is undergoing the introduction to the LHCb systems during the commissioning of the detector.
@@ -37,12 +37,12 @@ I also participated in detector shifts, in the LHCb control room.
 
 The applications of the machine learning methods for the High Energy Physics detectors usually show high specificity and customisation to the undergoing physics search and design of the detector.
 While it is usually necessary to develop solutions to particular problems, the problem of tracking and particle identification can be thought of as more universal.
-The work in generalising machine learning algorithms for particle physics experiments has been largely untouched.
+The studies in generalisation of machine learning algorithms for particle physics experiments have been largely untouched.
 The large and robust open dataset created by DeepLearnPhysics has created an opportunity for early search for a more general AI capable of understanding the rules of our universe.
 The opportunity was leveraged by an ambitious attempt to research the reinforcement learning method's application for particle tracking and identification in the LARTPC dataset.
 This research is presented in Chapter \ref{chap:rl-lartpc}, with a theoretical introduction in Chapter \ref{sec:neu_dec}.
 
-Additionally to the research work, my duties included conducting AGH course Python in the Enterprise. Throughout the years, I taught a total sum of around 250 students how to write clean, good, reliable pythonic code and provided guidance for their course-related projects. The students also learned how to use the GIT version control system and how to collaborate with other students on projects using Agile software development, Scrum, Continuous Integration and Deployment tools, as well as how to apply machine learning to real-world engineering problems.
+Additionally to the research work, my duties included leading the lab classes that are a part of the elective course The Python in the Enterprise. Throughout the years, I taught a total sum of around 250 students how to write clean, good, reliable pythonic code and provided guidance for their course-related projects. The students also learned how to use the GIT version control system and how to collaborate with other students on projects using Agile software development, Scrum, Continuous Integration and Deployment tools, as well as how to apply machine learning to real-world engineering problems.
 
 Below is the list of the contributed papers, as well as conference and schools participation.
 

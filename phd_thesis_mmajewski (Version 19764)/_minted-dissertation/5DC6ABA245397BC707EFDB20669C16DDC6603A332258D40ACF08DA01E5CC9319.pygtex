@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{config\PYGZus{}web}
-\PYG{k+kn}{from} \PYG{n+nn}{titania.web.main\PYGZus{}window} \PYG{k+kn}{import} \PYG{n}{MainWindow}
-
-\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZsq{}}\PYG{p}{:}
-    \PYG{n}{main\PYGZus{}window} \PYG{o}{=} \PYG{n}{MainWindow}\PYG{p}{(}\PYG{n}{tab\PYGZus{}config}\PYG{o}{=}\PYG{n}{config\PYGZus{}web}\PYG{o}{.}\PYG{n}{config}\PYG{p}{)}
-    \PYG{n}{main\PYGZus{}window}\PYG{o}{.}\PYG{n}{run}\PYG{p}{()\PYGZcb{}}
-\end{Verbatim}

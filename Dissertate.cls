@@ -75,7 +75,7 @@
 \renewcommand\listfigurename{Listing of figures}
 
 \onehalfspacing
-%\raggedright
+\raggedright
 \parindent 12pt
 
 \RequirePackage{mathspec}%
@@ -109,8 +109,8 @@ Ligatures={Common},
 SizeFeatures={%
 	{Size={-10}, Font=*-RegularCaption},
 	{Size={10-13.0}, Font=*},
-	{Size={13.01-19.9}, Font=*-RegularSubhead, Ligatures=Rare, Contextuals={Swash,Alternate}},
-	{Size={19.91-},Font=*-RegularDisplay, Ligatures=Rare, Contextuals={Swash,Alternate}}},
+	{Size={13.01-19.9}, Font=*-RegularSubhead,  Contextuals={Swash,Alternate}},
+	{Size={19.91-},Font=*-RegularDisplay,  Contextuals={Swash,Alternate}}},
 UprightFont=ArnoPro-Regular,
 BoldFont=ArnoPro-Bold,
 ItalicFont=ArnoPro-Italic,
@@ -125,6 +125,7 @@ BoldItalicFont=ArnoPro-BoldItalic
 %								figurewithin=chapter,
 %								tablewithin=chapter]{caption}
 \RequirePackage[labelfont={sf,bf,small},textfont={sf,small},justification=RaggedRight,margin=0pt, figurewithin=section, tablewithin=section]{caption}
+
 % \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \onehalfspacing
@@ -182,43 +183,43 @@ BoldItalicFont=ArnoPro-BoldItalic
 
 \thispagestyle{empty}
 %% ------------------------ NAGLOWEK STRONY ---------------------------------
-\includegraphics[height=37.5mm]{figures/agh_nzw_a_en_1w_wbr_rgb_150ppi.jpg}\\
-\rule{23.3mm}{0pt}
-{\large \bf \sf Faculty of Physics and Applied Computer Science}\\
-\rule{\textwidth}{3pt}\\
-\rule[2ex]
-{\textwidth}{1pt}\\
-\vspace{7ex}
+\hspace*{-3cm}
+\noindent
+\vspace{3ex}
 \begin{center}
-	{\LARGE \bf Doctoral thesis}\\
-	\vspace{13ex}
-	% --------------------------- IMIE I NAZWISKO -------------------------------
-	{\bf \Large Maciej Witold Majewski}\\
-	\vspace{3ex}
-	{\small \mbox{}}\\
-	\vspace{1.5ex}
-	{\small \mbox{}}\\
-	%\vspace{10ex}
-	%% ------------------------ TYTUL PRACY --------------------------------------
-	{\bf \LARGE Application of machine learning methods for the analysis of the calibration of the LHCb VELO detector, }\\
-	\vspace{6pt}
-	{\bf \LARGE studies of irradiated silicon pixel sensors and reconstruction of the neutrino interaction in LARTPC detector}\\
-	\vspace{6pt}
-\end{center}
-\vspace{14ex}
-%% ------------------------ PROMOTOR PRACY ------------------------------------
-{\centering
-	\begin{tabbing}
-		{\large Supervisor: }{\large\bf dr hab. inż. Tomasz Szumlak}\\[2pt]
-	\end{tabbing}
-}
+\includegraphics[height=52.5mm]{./figures/logo2.jpg}\\
+\vspace{8ex}
+{\large \bf FIELD OF SCIENCE: Natural sciences}\\
+\vspace{3ex}
+{SCIENTIFIC DISCIPLINE: Physical sciences}\\
+\vspace{10ex}
+{\Huge \bf DOCTORAL THESIS}\\
+\vspace{8ex}
 
-\begin{center}
-\vspace*{12ex} {\sf \large \bf Cracow, January 2021}
+
+
+	% --------------------------- IMIE I NAZWISKO -------------------------------
+\setstretch{2}
+{\LARGE Application of machine learning methods for the analysis of the calibration of the LHCb VELO detector, studies of irradiated silicon pixel sensors and reconstruction of the neutrino interaction in LARTPC detector}\\
+\onehalfspacing
+\vspace{12ex} 	%\vspace{10ex}
+	%% ------------------------ TYTUL PRACY --------------------------------------
+{\large Author: Maciej Witold Majewski}\\
+\vspace{12ex}
+
+%___________________________________________
+%Supervisors
+{\large First supervisor: prof. dr hab. inż. Tomasz Szumlak}\\
+\vspace{1ex}
+{\large Assisting supervisor: dr inż. Bartłomiej Rachwał }\\
+
+
+
+\vspace{12ex}
+{\large Completed in: AGH University of Science and Technology,  Department of Particle Interactions and Detection Techniques,}
+{\large Kraków, 2022}
 \end{center}
 %% =====  STRONA TYTULOWA PRACY doktorskiej====
-\afterpage{\blankpage}
-\newpage
 \thispagestyle{empty}
 \newpage
 % @TODO

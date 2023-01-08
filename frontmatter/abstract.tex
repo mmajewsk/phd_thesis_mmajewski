@@ -1,9 +1,51 @@
-% the abstract
-
-% \section{Abstract (Polish Version)}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
-
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
-
+Praca ta łączy wiele tematów dotyczących detektorów cząstek i nowatorskich zastosowań inteligencji obliczeniowej w celu usprawnienia analizy danych przez nie wytwarzanych.
+Jako ekspert i entuzjasta AI, moim głównym przedmiotem badań jest zastosowanie metod uczenia maszynowego do rozwiązywania problemów w dziedzinie detektorów cząstek wysokich energii.
+Istota tego dokumentu dotyczy spektrometru LHCb i jego wysokoprecyzyjnego krzemowego detektora Vertex Locator zarówno w wersji paskowej, jak i zmodernizowanego - w wersji pikselowej.
+LHCb jest jednym z detektorów przy Wielkim Zderzaczu Hadronów, a jego odkrycia przyczyniły się do pogłebionego rozumienia fizyki cząstek elementarnych.
+W dwóch okresach zbierania danych, Run 1 (2011-2012) i Run 2 (2015-2018), zgromadzono próbki danych o zintegrowanej świetlności około $9fb^{-1}$. Eksploatacja detektorów krzemowych w tak intensywnym polu promieniowania wiąże się z kosztem w postaci uszkodzeń radiacyjnych. Fakt ten był głównym powodem unowocześnienia wstępnego projektu dla nadchodzących Run 3 i 4.
 
 
+Unikalne wymagania i warunki, w jakich musi pracować detektor Velo, wymagają szeroko zakrojonej fazy badawczej związanej nie tylko z badaniami sprzętowymi, ale także z nowymi metodami monitorowania i analizy stanu detektora. Te ostatnie zostały przedstawione w niniejszej rozprawie.
+
+Rozdziały początkowe, do Rozdziału \ref{chap:ml} włącznie, zawierają niezbędne teoretyczne i techniczne wprowadzenie do szczegółowych celów badawczych, konstrukcji detektora i metod analizy.
+Rozdziały poruszające unikalną analizę kalibracji detektora Velo w Runs 1 i 2 zawarte są w Rozdziale \ref{chap:ml-velo}, a badania zmodernizowanego detektora w Rozdziale \ref{chap:ml-velo-pix}.
+
+W pierwszej części prezentowanych badań badane są dwa parametry kalibracyjne pochodzące od sygnału szumu odbieranego przez sensory krzemowe detektora, pedestal (średnia szumu) i threshold (odchylenie standardowe szumu). Parametry te badane są pod różnymi kątami i w różnych wymiarach.
+Analiza trendu piedestałów nie wykazała żadnych utrzymujących się efektów, co potwierdza, że adaptacja napięcia podawanego do detektora mieściła się w akceptowalnych zakresach.
+Analiza parametrów progowych wykazała wpływ szkodliwego promieniowania na sensory. Zainspirowała ona stworzenie nowatorskiego algorytmu opartego na uczeniu maszynowym do oceny kalibracji.
+Stworzyłem i zaimplementowałem algorytm o nazwie ``outlierness'' i z powodzeniem wprowadziłem go do monitorowania detektora Velo w 2018 roku.
+
+Duża wymiarowość problemu (duża liczba indywidualnych kanałów odczytu sensorów) przyczyniła się do testów algorytmów redukcji wymiarowości (PCA i autoencoder). Testy wykazały iż oba algorytmy mogą ujawnić anomalie w funkcjonowaniu detektora.
+Subtelne przesunięcia w relacji kalibracji do szumu występującego w detektorze podczas pobierania danych skłoniły nas do wykorzystania tego efektu i użycia rekurencyjnej sieci neuronowej do przewidywania czasu niezbędnej kalibracji detektora.
+
+Nowy detektor Velo w nadchodzącym Run 3 wykorzystuje pikselową matryce jako sensor i zwiększa liczbę poszczególnych kanałów o ponad dwa rzędy wielkości.
+Brałem udział w tworzeniu nowatorskiej metody wyszukiwania i śledzenia skupisk zamaskowanych (wadliwych) pikseli, wykorzystującej strumień danych kalibracyjnych. Ta metoda pozwoli na bardziej świadome podejmowanie decyzji o konieczności wykonania kalibracji detektora.
+
+O ile większość metod analizy kalibracji detektora bazujących na uczeniu maszyniweym może być wykorzystana dopiero gdy detektor jest już w pełni uruchomiony i funkcjonuje, o tyle dane testowe detektorów mogą być wykorzystane do badania skutków promieniowania.
+Nowy sensor VeloPix rejestruje sygnał przekroczenia progu czasowego, który za pomocą funkcji zastępczej ("surrogate function") można powiązać z energią zdeponowaną w sensorze wyrażoną w $eV$. 
+
+Okazuje się że zmiana parametrów funkcji rekonstruującej ładunek jest powiązana z ilością całkowitego promieniowania dostarczonego do sensora. Badałem ten efekt, co doprowadziło do opracowania podstaw przełomowej inteligentnej metody oceny fluencji sensora.
+
+
+Doświadczenia z pracy z Velo doprowadziły do opracowania niezbędnych i nowatorskich rozwiązań problemów praktycznych przedstawionych w rozdziale  \ref{chap:software}.
+Kontakt z danymi kalibracyjnymi i świadomość potrzeby narzędzi do ich przetwarzania, przyczyniły się do stworzenia webowego serwisu bazodanowego o nazwie Storck, który jest w trakcie wprowadzania do systemów LHCb podczas rozruchu detektora.
+Wraz z systemem bazodanowym prezentowany jest open source'owy framework do efektywnego tworzenia narzędzi monitorujących - Titania.
+Storck i Titania są generycznymi narzędziami open-source, które mogą być używane niezależnie w dowolnym eksperymencie.
+Kierowałem rozwojem obu tych projektów wraz z kilkoma programistami.
+
+Projekty związane z LHCb spowodowały moją częstą obecność w CERN. 
+Uczestniczyłem w wielu spotkaniach, dotyczących projektowania procedur związanych z kalibracją.
+Brałem także udział w dyżurach w centrum kontroli detektora LHCb.
+
+Zastosowania metod uczenia maszynowego w detektorach fizyki wysokich energii wykazują zwykle dużą specyfikę i dostosowanie do szczegółowego celu badawczego z zakresu fizyki i konstrukcji detektora.
+O ile zwykle konieczne jest opracowanie rozwiązań dla konkretnych problemów, o tyle o problemie śledzenia i identyfikacji cząstek można myśleć jako o bardziej uniwersalnym.
+Prace nad uogólnieniem algorytmów uczenia maszynowego na potrzeby eksperymentów fizyki cząstek są w durzej mierze dziewiczym terenem badań.
+Duży i otwarty zbiór danych stworzony przez kolaborację DeepLearnPhysics jest okazją do wczesnego poszukiwania bardziej ogólnej AI zdolnej do zrozumienia zasad rządzących naszym wszechświatem.
+Szansa ta została wykorzystana przez ambitną próbę zbadania zastosowania metody uczenia wzmacniającego do śledzenia i identyfikacji cząstek w zbiorze danych LARTPC.
+Badania te zostały przedstawione w rozdziale \ref{chap:rl-lartpc}, a wprowadzenie teoretyczne w rozdziale \ref{sec:neu_dec}.
+
+Dodatkowo do pracy badawczej, do moich obowiązków należało prowadzenie zajęć laboratoryjnych będących częścią kursu obieralnego The Python in the Enterprise. Przez te lata nauczałem około 250 studentów, jak pisać czysty, dobry, niezawodny kod w pythonie i udzielałem wskazówek dotyczących ich projektów związanych z kursem. Studenci nauczyli się również jak używać systemu kontroli wersji GIT oraz jak współpracować z innymi studentami przy projektach wykorzystujących narzędzia takie jak Agile software development, Scrum, Continuous Integration and Deployment, a także jak stosować uczenie maszynowe do rzeczywistych problemów inżynierskich.
+
+Poniżej znajduje się lista wygłoszonych referatów, a także udział w konferencjach i szkołach.
+
+\newpage

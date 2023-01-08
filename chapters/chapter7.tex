@@ -71,34 +71,48 @@ The energy deposition for an individual particle is stored in a 3D voxel of 0.5 
 Next, the 3D data is projected onto three 2D planes.
 Then the data that contains less than 5 pixels in any given projection with a pixel value lower than 0.1 MeV is rejected.
 The values of voxels lower than 0.1 Mev are trimmed to 0.
-For the purpose of this research we do not use full 3D voxelised information, but one of the 2D projections.
+For the purpose of this research I do not use full 3D voxelised information, but one of the 2D projections.
 
 
 \section{Dataset}
 
 The dataset generated from the simulations and used in this research is available at the DeepLearnPhysics collaboration website \cite{dlp_website}.
 This dataset contains 15.000 training samples as well as 10.000 test samples.
-Each of the samples contains a single simulation of a signal event, as discussed in the previous subsection. The simulations are saved as two 2D images - a source image where only information is the energy deposit in the pixel and a target image - where pixels hold the information about the type of the particle in the given pixel. Also, the target image contains 3 types of pixels: background, EM-shower particles, and track particles (i.e. not EM-shower).
+Each of the samples contains a single simulation of a signal event, as discussed in the previous subsection.
+The simulations are saved as two 2D images - a source image where only information is the energy deposit in the pixel and a target image - where pixels hold the information about the type of the particle in the given pixel.
+The target image contains 3 types of pixels: background, EM-shower particles, and track particles (i.e. not EM-shower).
+
+As the images are genreated from a simulation, they can have arbitraly large size.
+This is also reflected in the RL environment mentioned later in the chapter.
+For the examplary solution the 256x256 in size of the image is used.
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/chapter7/examplary_data.png}
-\caption{Exemplary data from the LARTPC dataset. \textbf{Left} image is the source input, and the \textbf{right} image is the desired output (target)}
+\begin{subfigure}[b]{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{figures/chapter7/examplary_data_x.pdf}
+  \end{subfigure}
+
+\begin{subfigure}[b]{\textwidth}
+\centering
+\includegraphics[width=0.7\textwidth]{figures/chapter7/examplary_data_y.pdf}
+  \end{subfigure}
+\caption{Exemplary data from the LARTPC dataset. \textbf{Top} image is the source input, and the \textbf{bottom} image is the desired output (target)}
 \label{fig:lartpc-data-example}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[b]{0.47\textwidth}
+\begin{subfigure}[b]{0.67\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/chapter7/examplary_data_zoom_source.png}
+    \includegraphics[width=\linewidth]{figures/chapter7/examplary_data_zoom_source.pdf}
 \caption{Source (X)}
    \label{plot:lartpc-example-source-zoom}
   \end{subfigure}
-\begin{subfigure}[b]{0.47\textwidth}
+\begin{subfigure}[b]{0.67\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/chapter7/examplary_data_zoom_target.png}
+    \includegraphics[width=\linewidth]{figures/chapter7/examplary_data_zoom_target.pdf}
 \caption{Target (Y)}
     \label{plot:lartpc-example-target-zoom}
   \end{subfigure}
@@ -143,10 +157,10 @@ The reinforcement learning approach requires a ``game-fication'' of the problem.
 That means that we essentially want to turn the problem into a game, preferably one that allows for gaining points along with the progress of playing.
 For this purpose the gym-lartpc environment was created \cite{gymlartpc}.
 It is based on the openai-gym library \cite{openaigym}.
-The game should consist of an environment and an actor.
-The actor can interact with the environment and modify it.
-In the case of lartpc data, the actor will be an analogue to a particle, and the environment is analogue to the space inside LARTPC medium.
-Before we detail the implementation itself, it is vital to present a formalisation of the problem.
+As explained in the Sec. \ref{sec:deep_rl} game should consist of an environment and an agent.
+The agent can interact with the environment and modify it.
+In the case of lartpc data, the agent will be an analogue to a particle, and the environment is analogue to the space inside LARTPC medium.
+Before the detail of implementation itself are presented, it is vital to present a formalisation of the problem.
 
 \subsection{Formalisation}
 
@@ -156,12 +170,12 @@ This subsection will present steps towards representing the gym-lartpc environme
 \subsubsection{Maps}
 
 In the sense of translating the LARTPC data into game, the images of the dataset can be thought of as maps, which the agent will explore.
-Although original dataset samples contains source and target, for the purpose of creating the game environment we add an additional map called canvas.
-The agent will explore the source map ($S$, 512x512) and by using it the agent will try to approximate the target map ($T$, 512x512). An example of source and target can be seen at \ref{fig:lartpc-data-example}. The output of the approximation is saved on the canvas map ($C$, 512x512x3), which is the actual output of the algorithm.
+Although original dataset samples contains source and target, for the purpose of creating the game environment an additional map called canvas is added.
+The agent will explore the source map ($S$, 256x256) and by using it the agent will try to approximate the target map ($T$, 256x256). An example of source and target can be seen at \ref{fig:lartpc-data-example}.
+The output of the approximation is saved on the canvas map ($C$, 256x256x3 - the last dimention is one of the thre categories), which is the actual output of the algorithm.
 The canvas map $C$ is used to create an image containing categorised pixels. 
-It is 
 This image then can be compared with the target of a given sample.
-The majority of the environment states are not available for the agent, so we only consider its nearest neighbourhood.
+The majority of the environment states are not available for the agent, so only its nearest neighbourhood is considered.
 This neighbourhood can be expressed as a quadratic window n x n.
 In total there are three types of window objects source map window $W^{S}$, canvas map window $W^{C}$ and target map window $W^{T}$.
 
@@ -171,8 +185,10 @@ The source map $S$, can be thought of as an sketch of a ready painting $T$. Then
 \subsubsection{States}
 
 
-We assume that the actor occupies a position on the map $P(x,y)$, with each step, this position may change.
-There is only a small subset of states from an environment available for the actor, defined by the window of the map. The state in the current timestep $t$ can be denoted as $s_{t}=(W^{S}_{t}, W^{C}_{t})$. These states create state space $S$ of MDP.
+It is assumed that the agent occupies a position on the map $p\_x,p\_y$, with each step, this position may change.
+There is only a small subset of states from an environment available for the agent, defined by the window on the map.
+The center of the window is always position at the agent position $p\_x,p\_$
+The state in the current timestep $t$ can be denoted as $s_{t}=(W^{S}_{t}, W^{C}_{t})$. These states create state space $S$ of MDP.
 
 \subsubsection{Actions}
 \label{sec:rl_action}
@@ -182,7 +198,7 @@ In such defined environment the total action can be expressed as composed of two
 \begin{description}
 \item[Movement action] - a decision on the direction of the next step in the game, expressed as a 2D vector $m_{t}$, where $[1,1]$ is a movement by one pixel right (x-axis) and one pixel up (y-axis).
 
-\item[Put action] - a KxKx3 tensor denoted by $c_{t}$. This matrix will be pasted into the canvas map C, on the coordinates of $P(x,y)$.
+\item[Put action] - a KxKx3 tensor denoted by $c_{t}$. This matrix will be pasted into the canvas map C, using proper window size on the coordinates defined by the center $p\_x,p\_$.
 The the last dimension of the tensor denote probability of given pixel belonging to one of the three categories (background, EM-shower particles, and track particles).
 The centre coordinate of the $c_{t}$ has the same coordinates as the Source Window centre.
 
@@ -190,7 +206,7 @@ The centre coordinate of the $c_{t}$ has the same coordinates as the Source Wind
 \end{description}
 
 The action can be expressed as a tuple $a_{t} = (m_{t}, c_{t})$.
-If we would go back to analogy of painting the picture, then you can imagine, that the $m_{t}$ would be direction of a stroke, and $c_{t}$ would be set of colors to use to paint. 
+Going back to analogy of painting the picture, one can imagine, that the $m_{t}$ would be direction of a stroke, and $c_{t}$ would be set of colors to use to paint. 
 The actions create action space $A$ of MDP.
 
 \subsubsection{Rewards}
@@ -215,7 +231,7 @@ That being said, the default implementation for the reward $R_{t}$ calculation f
 \label{eq:reward}
 \end{align}
 
-Where \(N_{discovered}(W^{c})\) return the number of the pixels in $W^{c}$ which haven't been categorised (painted) yet. 
+Where \(N_{discovered}(W^{c})\) is the number of the pixels in $W^{c}$ which haven't been categorised (painted) yet.
 This encourages to find the pixels that haven't been visited yet.
 The term $N_{\mathrm{nonzero}}(W^{s})$ is the number of non-zero (empty) pixels in source window $W^s$.
 The term $R3$ is a punishment when both $R1$ and $R2$ are zero, meaning that the source window is empty, and target window is already fully processed.
@@ -235,19 +251,20 @@ The elements of states, actions and rewards, along with the logic of the lartpc-
 
 But careful readers can notice that the term $R_{1}$ may be breaking the Markov property.
 Indeed, depending on the defined reward function, the environment can break the Markov property. 
-And with the reward defined as in Eq. \ref{eq:reward} it does indeed brake the Markov property, because the new state with the canvas map is constantly updated by the agent, canvas window $W^{c}_{t}$ contains the result put action $c_{t-1}$ from the previous step. It is important to note that in this case, only the number of already visited locations on the map, that are apparent in the $W^{c}_{t}$ is contributing to the reward, and not the values contained on $W^{c}_{t}$. 
+And with the reward defined as in Eq. \ref{eq:reward} it does brake the Markov property, because the new state with the canvas map is constantly updated by the agent, canvas window $W^{c}_{t}$ contains the result of put action $c_{t-1}$ from the previous step. It is important to note that in this case, only the number of already visited locations on the map, that are apparent in the $W^{c}_{t}$ is contributing to the reward, and not the values contained on $W^{c}_{t}$.
 
-Yet, this does not mean that the environment is unsolvable with reinforcement learning.
+Yet, the breaking of the Markov property does not mean that the environment is unsolvable with reinforcement learning.
 Many of the novel and state of the art solution to gaming environments, such as AlphaStar \cite{Vinyals2019}, or OpenAI five \cite{doi.org/10.48550/arxiv.1912.06680} are known to be rather non-markovian.
 In this case, another formulation of the problem may be useful: POMPD (Partially Observable MDP).
 POMDP can be expressed as 6-tuple $(S,A,P,R,\Omega,O)$ , where $(S,A,P,R)$ are the same as in MDP, but now the agent doesn't observe the states directly, but rather through observation $o \in O$.
 This observation is sampled according to some distribution $o \sim O(s)$. The $O(s)$ is a function that provides an observation given the state $s$ with some probability.
-In essence what that means is that the full underlying state of the environment may be obscured by the $O$. In a case of non-markovian environments the state can be understood as state with it's past history, and the observation $O$ provides only the most recent state, obscuring the past.
+In essence what that means is that the full underlying state of the environment may be obscured by the $O$.
+In a case of non-markovian environments the state can be understood as state with it's past history, and the observation $O$ provides only the most recent state, obscuring the past.
 A classical Deep Q-Learning has no explicit mechanism to solve the problem stated in this way, but some works \cite{doi.org/10.48550/arxiv.1507.06527} show that by adding the recurrency to the network, this becomes solvable.
 In the case of the model presented here, there is a hidden recurrent dependency of the model, as it reads and writes values to the target canvas.
 
 \section{Gym-lartpc package}
-The environment presented in the previous section was implemented in a Python Package called ``gym-lartpc'' \cite{gymlartpc}, which contains openai-gym interface.
+The environment formulated in the previous section was implemented in a Python Package called ``gym-lartpc'' \cite{gymlartpc}, which contains openai-gym interface.
 Openai-gym \cite{openaigym}is a popular open-source project containing reinforcement learning environments.
 Each of the environments provides exactly the same style of the interface.
 The minimal requirement for creating compatible environment with openai-gym is to extend the \textbf{gym.Env} class, and provide \textbf{step(action)}, \textbf{reset()} and \textbf{render()} methods.
@@ -256,7 +273,7 @@ The minimal requirement for creating compatible environment with openai-gym is t
 
 Although the package has the openai-gym environment interface, it also provides a separate custom interface for more sophisticated options for users' convenience.
 
-Although it does not contain official API documentation, the code itself is very clean and reads well enough.
+Although the gym-lartpc package does not contain official API documentation, the code itself is very clean and reads well enough.
 
 \subsection{Classes}
 
@@ -312,11 +329,11 @@ Here the result dimension means the size of the two-dimensional window that will
 When using the \textbf{game.detector.set\_maps()} method the maps are set to a random source target pair coming from LartpcData class.
 The \textbf{game.start()} resets the state of the environment and assigns a random, non-zero, non-visited location to the cursor in the environment.
 Then, the current observation of the game can be accessed by the \textbf{game.get\_observation()} attribute and action can be passed using \textbf{game.step()} method. This will move the cursor according to the movement contained inside the action and will change the value on the canvas map at the scope occupied by the cursor.
-It is worth noting that three types of objects are exchanged between the environment and agent (see implementation in \ref{listing:rl_observables});
+It is worth noting that three types of objects are exchanged between the environment and agent (see corresponding listing in \ref{listing:rl_observables});
 \end{sloppypar}
 
 \begin{description}
-\item[Action2Dai] which embodies an action $a_{t} = (m_{t}, c_{t})$. Contains \textbf{movement\_vector} attribute ($m_t$), which is expected to be a numpy array of shape 1x2 (a vector of length two), and a \textbf{put\_data} ($c_t$) which is expected to be 2D array of a shape compatible with result dimension. This is the action described in Sec. \ref{sec:rl_action}.
+\item[Action2Dai] which embodies an action $a_{t} = (m_{t}, c_{t})$. Contains \textbf{movement\_vector} attribute ($m_t$), which is eected to be a numpy array of shape 1x2 (a vector of length two), and a \textbf{put\_data} ($c_t$) which is expected to be 2D array of a shape compatible with result dimension. This is the action described in Sec. \ref{sec:rl_action}.
 
 \item[State2Dai] which contains the state of the game, as expected by the openai-gym. The state of the game in the gym-lartpc is a tuple consisting of current observation of the environment, reward, ``done'' flag, and empty string.
 The empty string is a space-holder for any additional information coming from the environment required by the openai-gym implementation. ``Done'' flag is true if the game has ended.
@@ -364,7 +381,7 @@ class Action2Dai(StaticTyped):
 The package also allows for visualisation of the game, implemented using PyQt.
 This feature allows for step by step basis watching of the progress of the algorithm, using the space key.
 The Fig. \ref{fig:lartpc-visual} contains a screenshot of the visualisation running in 6 different windows.
-The top row of windows depicts the the parts of the maps visible to the the actor, and the lower row of windows shows the position of the actor on each of the maps.
+The top row of windows depicts the the parts of the maps visible to the the agent, and the lower row of windows shows the position of the agent on each of the maps.
 
 \begin{figure}[H]
 \centering
@@ -404,8 +421,8 @@ There is a vast range of reinforcement learning algorithms. Probably the two mos
 Policy gradient methods in contrast to DQN (or value based methods), do not seek a best action, given states, but learn the probabilistic mapping of from state to value}.
 The most successful solution to the problem posed by the environment in our research was DDQN, with Memory Buffer.
 
-In the Fig. \ref{fig:settings} the hyper-parameters of the model are defined.
-The environment, consisting of three maps, outputs an observation state, consisting of three smaller windows, and after each action provides the reward.
+The Fig. \ref{fig:settings} presents interaction of the agent and the environment.
+The environment, containing three maps, outputs an observation state, consisting of three smaller windows, and after each action provides the reward.
 The agent uses the \textit{canvas} and \textit{source} information in two blocks, called movement block and classification block.
 The higher level conceptualisation of the input and output to the agent can be seen in Fig. \ref{fig:rl_inp_out}.
 The movement block is responsible for selecting the direction in which to move in upcoming action (Movement Decision).
@@ -433,7 +450,7 @@ Output from both blocks is concatenated and passed to three fully connected laye
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/chapter7/lartpc_rl_network.drawio.png}
-  \caption{The complete model of the employed agent neural network. Source and Canvas input windows enter the movement block after binarisation and concatenation. The Source input alone also enters the classification block as is. The movement block returns a vector of size N. N is the number of possible movement directions (usually N=8). The classification block returns a vectorised matrix of classified pixels, of length K. Usually K=1 or K=9. Both blocks outputs are then concatenated and passed to the joint layer, which outputs a vector of size N+K.}
+  \caption{The complete model of the employed agent neural network. Source and Canvas input windows enter the movement block after binarisation and concatenation. The Source input alone also enters the classification block as is. The movement block returns a vector of size N. N is the number of possible movement directions (usually N=8 - any neighbouring pixel). The classification block returns a vectorised matrix of classified pixels, of length K. Usually K=1 or K=9. Both blocks outputs are then concatenated and passed to the joint layer, which outputs a vector of size N+K.}
   \label{fig:rl_net}
 \end{figure}
 
@@ -482,18 +499,18 @@ trials & 8 \\
 \end{table}
 The details of the training process are out of the scope of this description and may be found in the github repository \cite{dqn_lartpc}.
 The table \ref{tab:rl_params} shows some of the parameters used for the training of the DQN model.
-From the training quality metrics, depicted in the Figure \ref{fig:rl_learning}, one can see that the value of the reward function is growing, which proves that the model is maximising the reward. You can also see that the MSE loss function grows and then drops. We attribute this to a high epsilon value at the start and the memory buffer being filled with more uncomplicated episodes. Then the complexity of the task grows when the agent learns to explore, and then overall slowly decreases and stabilises as it learns.
+From the training quality metrics, depicted in the Figure \ref{fig:rl_learning}, one can see that the value of the reward function is growing, which proves that the model is maximising the reward. You can also see that the MSE loss function grows and then drops. This is attributted to a high epsilon value at the start and the memory buffer being filled with more uncomplicated episodes. Then the complexity of the task grows when the agent learns to explore, and then overall slowly decreases and stabilises as it learns.
 It is by no means trivial to evaluate the performance of a reinforcement learning agent by only basing it upon the loss metrics and rewards defined in the previous section. The difficulty of the problem may fluctuate, as some parts of the images are easier to solve than others, the actions of the agent may influence future difficulty, and the epsilon-greedy \footnote{epsilon-greedy algorithm chooses either an action generated by the model, or completely random action based on a $\epsilon$ probability} actions introduce randomness into the process. The evaluation by observation of the agent behaviour was necessary.
-We observed that the agent indeed was following the tracks of the particles, but in the case of a more significant number of possible steps, the agent tended to ``escape'' an area with only an isolated non-zero pixel visible.
+It is observed that the agent indeed was following the tracks of the particles, but in the case of a more significant number of possible steps, the agent tended to ``escape'' an area with only an isolated non-zero pixel visible.
 
 \section{Results}
 The proposed DDQN solution to the problem posed by the gym-lartpc environment is meant to serve as a baseline for future research. DDQN has proved to be capable of performing very basic navigation through the decay tree. The goal of this baseline study is to show how the gym-lartpc environment can be used.
-We invite other researchers to use our environment for future experimentation with reinforcement learning, which is openly available in the GitHub repositories\cite{gymlartpc} \cite{dqn_lartpc}.
+I invite other researchers to use our environment for future experimentation with reinforcement learning, which is openly available in the GitHub repositories\cite{gymlartpc} \cite{dqn_lartpc}.
 The future course for this work may include removing canvas as the feedback input and using a recurrent layer in the network.
 The other exciting possible extension could be rewarding the model to predict the direction and classification not for the current step but rather for the next step. This prediction could be applied to the environment and then fed back as an input to the model, generating new predictions and forming a feedback loop.
 Suppose one would translate the data read from any other experiment to the same voxel representation and scaled similar energy deposits (maintaining the same domain of particles). In that case, it might be possible to reuse the same model, or expand the simulation data, to create a single model for different detectors.
 
-The presented environment has the potential to be the groundwork for a more unified machine-learning-based model of physics coming from high energy physics experiments.
+The presented environment is the main focus of this study, and has the potential to be the groundwork for a more unified machine-learning-based model of physics coming from high energy physics experiments.
 A cross-experimental framework could shift a focus from researching particular branches of physics (neutrino physics, b-hadron physics, particle showers, etc.) to more holistic research that accounts for all of the effects met in these particular areas.
 A model suitable for multiple experiments could help us better understand the link between the parts of physics studied by those experiments.
 I believe that the reinforcement learning-based model also has the potential to be used for creating simulations, as it may be computationally less expensive.
