@@ -43,3 +43,6 @@ https://arxiv.org/abs/1601.02984
 * Simulation research notes
 Main source of intel: https://github.com/DeepLearnPhysics/Blog
 https://github.com/DeepLearnPhysics/lartpc_mlreco3d - pipeline ?
+
+
+1d028ccd22d997f102137caf3448ada5

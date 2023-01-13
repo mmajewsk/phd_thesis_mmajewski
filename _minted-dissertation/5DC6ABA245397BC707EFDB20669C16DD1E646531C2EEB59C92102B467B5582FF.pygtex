@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{x}{import config\PYGZus{}web}
-\PYG{x}{from titania.web.main\PYGZus{}window import MainWindow}
-
-\PYG{x}{if \PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{} == \PYGZsq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZsq{}:}
-\PYG{x}{    main\PYGZus{}window = MainWindow(tab\PYGZus{}config=config\PYGZus{}web.config)}
-\PYG{x}{    main\PYGZus{}window.run()\PYGZcb{}}
-\end{Verbatim}
