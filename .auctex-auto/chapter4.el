@@ -29,6 +29,7 @@
     "plot:all-bad-r-1"
     "plot:all-bad-r-2"
     "plot:all-bad-r-3"
+    "plot:all-bad-r"
     "plot:all-bad-phi-0"
     "plot:all-bad-phi-1"
     "plot:all-bad-phi-2"
@@ -54,13 +55,12 @@
     "plot:outlierness_data_example"
     "plot:gui"
     "chap4:dimred"
-    "plot:pca_pedestals_all"
     "plot:PCA_pedestals_0"
     "plot:PCA_pedestals_1"
     "plot:pca_all_peda"
     "plot:PCA_pedestals_2"
     "plot:PCA_pedestals_3"
-    "plot:pca_all_ped"
+    "plot:pca_all_pedb"
     "plot:PCA_pedestals_0_phi"
     "plot:PCA_pedestals_1_phi"
     "plot:pca_all_ped_phia"
@@ -91,6 +91,7 @@
     "chap:ml-velo-pix"
     "sec:velopix-mask"
     "fig:dbscan_clusters"
+    "fig:cluster_masks"
     "alg:two"
     "fig:sims"
     "fig:fin_clus"
@@ -106,6 +107,7 @@
     "plot:sensor_surrogate_p2"
     "fig:binning"
     "tab:fluence_per_bin"
+    "fig:boxplot"
     "plot:surr_s8_bins"
     "plot:corr_matrix"
     "fig:example_sur"
@@ -115,6 +117,7 @@
     "plot:model_s8_post"
     "fig:surrogate_fluence"
     "plot:landau_example"
-    "fig:mpv_vs_fluence"))
+    "fig:mpv_vs_fluence"
+    "tab:fit_parameter"))
  :latex)
 

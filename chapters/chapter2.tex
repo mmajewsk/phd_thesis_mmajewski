@@ -33,10 +33,10 @@ The tunnel depth ranges from 60 to 100 meters.
 \end{figure}
 
 The LHC was created in the same tunnel, which housed a Large Electron-Positron Collider.
-The accelerator has two beams of particles, the particles used for the beams are usually protons, but heavy ions (i.e. lead ions) are used for some periods of time.
+The accelerator has two counter rotating beams of particles, the particles used for the beams are usually protons, but heavy ions (i.e. lead ions) are used for some periods of time.
 Its actual work was divided into years of runs or data taking periods. Runs 1 and 2 were undergoing in 2009-2013 and 2015-2018. The planned run three is supposed to start in 2022.
 % https://news.fnal.gov/2021/11/lhc-is-making-a-splash-as-cms-prepares-for-run-3/#:~:text=On%20Oct.,in%20the%20spring%20of%202022.
-There are four main detectors positioned along LHC; Alice, Atlas, CMS, and LHCb.
+There are four main detectors positioned along LHC: Alice, Atlas, CMS, and LHCb.
 The entire accelerator complex is depicted in the Fig. \ref{fig:cern_complex}.
 The maximal energy of the particles is dependent on the capability of the dipole magnets that are used to guide the particles on the circular path.
 As of Run 1 and 2 of the LHC, the dipole magnets could generate 8.33 T  \cite{Evans_2008} for the 7 $TeV$ upper limit energy level of particles.
@@ -264,7 +264,7 @@ After the offset correction is applied (called the pedestal $P$ subtraction,\cit
 
 \footnotetext{Where ADC is Analogue to Digital Count that represents the amplitude of the signal after the digitisation.}
 
-The noise evaluated during the calibration procedure is vital for the hit detection and cluster reconstruction algorithm since it is used to suppress the channels without high ADC counts (Zero Suppression procedure). Here, we assume the correlation between charged particles passing through sensors and depositing the energy in their active volume and the signal amplitude measured on each readout strip.
+The noise evaluated during the calibration procedure is vital for the hit detection and cluster reconstruction algorithm since it is used to suppress the channels without high ADC counts (Zero Suppression procedure). Here, there is an assumption of the correlation between charged particles passing through sensors and depositing the energy in their active volume and the signal amplitude measured on each readout strip.
 The performance of the cluster reconstruction  algorithm is of critical importance for the Velo data quality.
 The algorithm is comprised of two stages hit detection and cluster building.
 The former step relied on so-called high thresholds evaluated for each channel using the measured noise.
@@ -333,7 +333,7 @@ The Fig. \ref{fig:radiation_damage}, shows that the bias voltage necessary for t
 The Large Hadron Collider and its detectors were planned to be incrementally
 improved over time. In LHC Run 3, there will be a significant increase
 in the instantaneous luminosity, and the Velo must adapt to that change. For this purpose the Velo group proposed to change the sensor technology from planar strip sensors to pixel ones
-read-out by the VeloPix ASIC that was adapted from the TimePix chip.
+read-out by the VeloPix ASIC that was adapted from the TimePix chip, which belongs to MediPix family of sensors.
 
 Some of the requirements for the upgraded detector include:
 \begin{itemize}
@@ -372,11 +372,17 @@ Each super-pixel can store up to two timestamps.
 Readout from the super-pixels is done via a 23-bit bus running at 13.3 MHz.
 This means that there is a data transfer only when there is a hit information. In other words, the new VeloPix detector is a trigger-less system.
 
-\subsubsection{Velopix masking and calibration}
+\subsubsection{Velopix masking}
 \label{chap2:velopix_calibration}
 
 A critical functionality of both vertex systems is a possibility to deactivate a problematic readout channels, also called "bad" channels. Typical reasons for deactivation can be related with sensor issues (for instance physical damage), problems with bonds (broken bond or partially connected bond) or readout lines. The best strategy to identify bad channels is to measure and trend noise.
-The procedure of collecting the noise data (without proton-proton collisions), identifying problematic channels and then disabling them is called masking. During the Run 1 and Run 2 operation a significant experience was gained related to this important issue. There was a fraction of bad channels that were considered "fixed" and they do not changed over time, however, a majority of them did not show permanent problems and evolved in time. Quick tagging of bad channels was essential for keeping the high data quality. For instance, a large number of noisy channels will create a stress in trigger readout system by producing spurious fake hits. This may degrade the tracking and increase processing time due to larger number of hits. In case of the pixel detector, that operates in trigger-less mode, large number of unmasked noisy channels can completely saturate the readout lines, since the fake hits will be sent constantly (in case of the strip detector it would be just one fake cluster per one trigger). Evaluation of the set of pixels to be masked will be performed during the, so called, equalisation that is the core of the VeloPix calibration procedure. The number and distribution of the masked channels must be carefully study and monitor during the data taking period. A short description of the equalisation is given below.
+The procedure of collecting the noise data (without proton-proton collisions), identifying problematic channels and then disabling them is called masking.
+
+During the Run 1 and Run 2 operation a significant experience was gained related to this important issue. There was a fraction of bad channels that were considered "fixed" and they do not changed over time, however, a majority of them did not show permanent problems and evolved in time. 
+Quick tagging of bad channels was essential for keeping the high data quality. 
+For instance, a large number of noisy channels will create a stress in trigger readout system by producing spurious fake hits. This may degrade the tracking and increase processing time due to larger number of hits. 
+
+In case of the pixel detector, that operates in trigger-less mode, large number of unmasked noisy channels can completely saturate the readout lines, since the fake hits will be sent constantly (in case of the strip detector it would be just one fake cluster per one trigger). Evaluation of the set of pixels to be masked will be performed during the, so called, equalisation that is the core of the VeloPix calibration procedure. The number and distribution of the masked channels must be carefully study and monitor during the data taking period. A short description of the equalisation is given below.
 
 
 
@@ -397,44 +403,35 @@ The procedure of collecting the noise data (without proton-proton collisions), i
 % http://cds.cern.ch/record/2636158/files/VeloPix%20Data%20Visualisation%20and%20Read-out%20Control.pdf
 % https://cds.cern.ch/record/2723996/files/2006.09559.pdf
 % https://www.researchgate.net/publication/291436661_Equalization_method_for_Medipix3RX
-
-Similarly to strip Velo, VeloPix will collect the noise calibration data \cite{Kopciewicz:2723996}. In
-the case of the VeloPix, each pixel has its own individual voltage threshold. If this
-threshold is exceeded by signal induced by a passing charged particle, we register a hit.
+\subsubsection{Velopix Calibration}
+Similarly to strip Velo, VeloPix will collect the noise calibration data \cite{Kopciewicz:2723996}. 
+In the case of the VeloPix, each pixel has its own individual voltage threshold. If this
+threshold is exceeded by signal induced by a passing charged particle, a hit is registered.
 There are two types of values that can be set in a readout chip to define individual thresholds: Global Threshold (GT) and Trim.
 The former is evaluated for each sensor matrix (255 x 255 pixels), whilst, the latter are defined per individual pixel,  they are 4-bit numbers (16 different values).
 Trim is a readout DAC voltage that is individually added to the signal in the discriminator such that it allows to achieve equal response for each pixel across the whole detector matrix.
-For the convenience of the Reader, the automatic procedure that is used to evaluate the GT and Trims is described briefly below.
-First, we set all pixels to use their $Trim_{0}$ value, and we scan the reaction of
-the pixels (thresholds) by moderating $GT$ value and, each time opening the shutter for a constant
-amount of time $T_{C}$. Then we repeat this operation for $Trim_{15}$.
-In both trim cases, we record the total number of active pixels (pixels that registered noise)
-$N_{HITS}(GT)$ as a function of $GT$, as well as the number of registered hits ${H_P}_{x,y}(GT)$ in each
-pixel $P_{x,y}$, in a $GT$.
-The mean of the gaussian distribution of noise events $H_{P_{x,y}}$ for each of the steps of $GT$ is
-used to calculate lower bound for trim ${TrimValue_0}_{x,y}$ in case of
-$Trim_{0}$, as well as to calculate ${TrimValue_{15}}_{x,y}$ in $Trim_{15}$.
-That means that a scan in $Trim_{0}$ and $Trim_{15}$ is used to set the range of voltage for
-the trims.
-The ${TrimValue_{0}}_{x,y}$ is used as the lower bound for all of the 16 trims in
-each individual pixel and the ${TrimValue_{15}}_{x,y}$ is used as the maximal bound for the trims.  Therefore one step of the trim is
-$TrimStep_{x,y} ={TrimValue_{15}}_{x,y}-{TrimValue_{0}}_{x,y}/15 $.
 
-That process allows us to calculate and calibrate trim values for each pixel.
+For the convenience of the Reader, the automatic procedure that is used to evaluate the GT and Trims is described briefly below. This a counterpart to the Velo Strip calibration and threshold calculation, and might be the key point to transferring many of the solutions described in this thesis to the Run 3. The visualisation of the procedure is shown in Fig. \ref{plot:velopix_thresholding}.
+
+The calibration procedure uses two types of thresholds: a $Trim$, and global threshold $GT$.
+The actual threshold (sensitivity) of the pixel is given by the sum of those two.
+
+The first step is to find a distribution of the counts of hits in the lowest trim setting  $Trim_{0}$ and highest trim setting $Trim_{15}$. This is done by openning the shutter of the sensor for constant of time and counting hits first in lowest trim setting then in the highest. In each of the trim settings the $GT$ is modulated, which leads to creation of two histograms, as visible in Fig. \ref{plot:velopix_thresholding}. $GT$ modulation takes place in predefined range nad step of DAC.
+Then, for a low and high bound of all pixels in a sensor, the mean of the distribution $Trim_{0}$ and $Trim_{15}$ are used, to set the $PixelTrim_{0}$ and $PixelTrim_{15}$. Those values are the same for every pixel.
+
+This creates a range for all 16 possibles trims, with the step of the trim being $TrimStep = \frac{PixelTrim_{15}-PixelTrim_{0}}{15}$.
+
 Now to determine which of the trim value should be set for the pixel, we
-take advantage of the $N_{HITS}(GT)$ measured in each of the two scans ($Trim_{0}$ and $Trim_{15}$). Both of those
-yield noise events distributed normally.
-We calculate mean of the distribution in TRIM0 $M_{TRIM0}$, and TRIM15
-$M_{TRIM15}$. The final value of the trims is calculated as
-$GT_{target} = M_{TRIM0}+M_{TRIM15}/2$.
-Then each of the pixels gain the trim value of ${PixelTrim_{x,y}}_{a}$ set as close to
-$GT_{target}$.
-Then to exclude the noise from the signal coming from the pixels, the
+take advantage of the distribution measured in each of the two scans ($Trim_{0}$ and $Trim_{15}$). Both of those yield noise events distributed normally.
+A perfect target of the global threshold $GT_{target} = \frac{TRIM_{0}+TRIM_{15}}{2}$ is set, in the center between two means of the distributions.
+Then each of the pixels gain the trim value of $PixelTrim(x,y)$ set as close to
+$GT_{target}$, where $PixelTrim(x,y)$ is any trim (integer) from the range $[0..15]$, where $0$ means $PixelTrim_{0}$ and $15$ means $PixelTrim{15}$.
+To exclude the noise from the signal coming from the pixels, the
 effective global threshold $GT_{effective}$ is set to
-$GT_{target} + 1000 electrons$.
+$GT_{target} + 1000[electrons]$.
 So the actual threshold for the individual pixel
-$Th_{x,y} = {PixelTrim_{x,y}}_{a} + GT_{target} + 1000 electrons$
-This procedure is visualised in Fig. \ref{plot:velopix_thresholding}.
+$Th_{x,y} = {PixelTrim(x,y)} + GT_{target} + 1000[electrons]$
+
 % \subsubsection{Calibration example}
 % Let's say that we start the scan with global threshold value of $GT = 1100 DAC$, and increase to $1600 DAC$, with a
 % step of $1 DAC$.

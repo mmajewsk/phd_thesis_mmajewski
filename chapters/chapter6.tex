@@ -6,7 +6,11 @@ I have done a terrible thing: I have postulated a particle that cannot be detect
 \chapter{Neutrino induced processes}
 \label{sec:neu_dec}
 
-In this chapter a very short description of the possible reactions detectable via tracking detectors and induced by neutrinos are described. The Author did not perform any physics analysis regarding the neutrinos but contributed to reconstruction algorithm described in the next chapter.
+In this chapter a very short description of the possible reactions detectable via tracking detectors and induced by neutrinos are described, as well as brief introduction to neutrino detection. 
+The Author did not perform any physics analysis regarding the neutrinos but 
+contributed to reconstruction algorithm described in the next chapter.
+
+\section{Neutrino experiments}
 Neutrino observation is one of the most challenging problems in modern particle physics.
 Neutrino experiments come in many different shapes and sizes.
 The notable examples of the extreme lengths that scientists come through pursuing the science of neutrinos include;
@@ -17,6 +21,7 @@ The notable examples of the extreme lengths that scientists come through pursuin
 \item ICE-CUBE\cite{Abbasi_2009} - contains 5 160 optical sensors placed directly on the South Pole, 1,5 - 2,5 km deep inside the Antarctic ice sheet
 \end{itemize}
 
+\section{LARTPC detector}
 LARTPC (Liquid Argon Time Projection Chamber) \cite{Rubbia:117852} detectors are a family of detectors developed from TPC detectors (Time Projection Chamber) \cite{osti_6545918}.
 In general, such detectors consist of a volume of medium (radiator) between two plates (anode and cathode) that create an electric field.
 When a particle travels through the detector's active volume, it excites the electrons, which interact with the electric field and move toward the collection plate (see Figure \ref{fig:lartpc-scheme}).
@@ -44,13 +49,14 @@ The trigger information provides the timing information about the event \cite{mi
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=8.\textwidth]{figures/chapter6/Operational-principle-of-the-MicroBooNE-LArTPC.png}
+\includegraphics[width=.6\textwidth]{figures/chapter6/Operational-principle-of-the-MicroBooNE-LArTPC.png}
 \caption{A diagram of LARTPC planes \cite{microboone}}
 \label{fig:lartpc-grids}
 \end{figure}
 
 \section{Neutrino production and observation}
 
+In order to paint a better picture of the nature of the neutrino detection, this section depcits some of the interactions in physics that involve neutrino.
 Neutrinos are notorious for their elusiveness. Their only known interaction with matter is through the weak force.
 One of their most popular interaction is in \textbf{beta decay}, otherwise the neutrinos in the range of medium and higher energies interact via: \textbf{Elastic and Quasielastic scattering}, \textbf{Deep inelastic scattering} and \textbf{Resonance production}.
 
@@ -63,7 +69,7 @@ One of their most popular interaction is in \textbf{beta decay}, otherwise the n
 
 \subsection{Beta-decay}
 
-The first processes in physics, also known as nuclear decays, that involves neutrinos are $\Beta^{-}$ and  $\Beta^{+}$ decays.
+The simplest processes that involves neutrinos are $\Beta^{-}$ and  $\Beta^{+}$ decays.
 The common examples of these processes are $n \rightarrow p + e^{-}+\bar{\nu}_e$ and $n \rightarrow p + e^{+}+\nu_e$ respectively, which on the quark level can be expressed as $u \rightarrow d + e^{-}+\bar{\nu_e}$ (Fig \ref{plot:beta_m}) and $d \rightarrow u + e^{+}+\nu_e$ (Fig \ref{plot:beta_p}).
 
 \begin{figure}[H]
@@ -95,7 +101,7 @@ The common examples of these processes are $n \rightarrow p + e^{-}+\bar{\nu}_e$
 The most interesting range of energies, defined arbitrarily, for neutrinos spans from medium ($0.1 GeV$) to high ($1TeV$) values.
 As previously stated, neutrinos only interact with the matter through weak interaction.
 This is why the neutrino is not directly detectable, but instead, detectors rely on secondary particles for evidence of neutrinos.
-Multiple probable processes can produce observable particles (see Figure \ref{plot:neutrino_cross_section}); we will introduce some more probable ones in this subsection.
+Multiple probable processes can produce observable particles (see Figure \ref{plot:neutrino_cross_section}); I will introduce some more probable ones in this subsection.
 
 \begin{figure}[H]
 \centering
@@ -197,10 +203,13 @@ Due to the rarity, ultra high energy neutrinos are one of the least experimental
 
 \section{Summary}
 
+This chapter introduces reader to the LARTPC detector as well as basic processes in neutrino physics.
+
 Although the neutrinos themselves are limited to only weak interactions, after the deposition of the energy, a vast array of mostly charged particles can either be produced, excited or use the deposited energy to create a further chain of reaction.
 The selected processes depicted in Sec. \ref{sec:QE}-\ref{sec:RES}, provide a short glance at the possibilities.
 It is worth noting that although there exist many channels of interaction for the neutrino, the cross-sections are very small compared to other branches of physics.
 
+This theoritical introduction is important in consideration of the next chapter, where I present the algorithm for the LARTPC detector.
 
 %%% Local Variables:
 %%% mode: latex

@@ -9,9 +9,9 @@ What emerged from the darkness of the caves, from the depths of millennia, we wi
 
 Although machine learning experienced rapid growth in the second decade of the new Millenium, it has come a long and difficult path to become almost omnipresent in everyone's life and in many scientific disciplines.
 The high energy physics is not an exception, and in fact, the majority of this thesis describes various approaches to application of computational intelligence in field of particle physics.
-This chapter contains an introduction to the machine learning methods used in further chapters.
+This chapter contains necessary introduction to the machine learning methods used in further chapters.
 
-One of the events that can be thought of as the birth of machine learning is the invention of the perceptron.
+Lets begin with quick history of the machine learning. One of the events that can be thought of as the birth of machine learning is the invention of the perceptron.
 The perceptron was the protoplast of the artificial neural networks we know today. It was created by Frank Rosenblatt \cite{Rosenblatt1958ThePA} in 1958.
 In essence, the perceptron is what we today can call a single layer neural network.
 Famously, the over-promising of the capabilities of the perceptron was one of the leading causes for the so-called ``first AI winter''\cite{enwiki:1076647189}.
@@ -125,9 +125,9 @@ To much of the disappointment of many computer science students, the difference 
 
 The ``learning'' part of machine learning comes from the fact that the ``machine'' is given examples, pairs of input and desired output $(x,y)$.
 The goal of the machine is to find such function $f(x)$ that $y=f(x)$.
-Realistically speaking, not all of the tasks might be representable by the machine, so we expect approximation $y \approx f(x)$.
+Realistically speaking, not all of the tasks might be representable by the machine, so an approximation $y \approx f(x)$ is expected.
 The error of this approximation can be expressed as $\epsilon = y - f(x)$.
-Because a simple difference of two vectors may not be most suitable, we define a network's loss metric which is a function that given network output $f(x)$ and the target value $y$ will yield an error value $\epsilon = loss(f(x), y)$.
+Because a simple difference of two vectors may not be most suitable, a network's loss metric is defined which is a function that given network output $f(x)$ and the target value $y$ will yield an error value $\epsilon = loss(f(x), y)$.
 Several possible loss metrics exist, which can be used in a number of cases.
 For classification, the popular loss metric is log-loss also known as cross-entropy, visible in Eq. \ref{eq:logloss} where $p$ is a predicted probability.
 For regression tasks, an example of a loss metric is the mean squared error (MSE).
@@ -138,20 +138,20 @@ For regression tasks, an example of a loss metric is the mean squared error (MSE
 \end{align}
 
 The metrics can assess the quality of the output of the neural network.
-This gives the opportunity to measure the error of the network, and in turn, we can optimise its response with respect to its weights.
+This gives the opportunity to measure the error of the network, and in turn, to optimise its response with respect to its weights.
 The popular way of doing this is using a stochastic gradient descent which is a variation of a gradient descent algorithm.
-The gradient descent algorithm is a minimisation algorithm that finds the optimal solution by following the gradient of a function. In our particular case of machine learning we study the properties of the loss function.
+The gradient descent algorithm is a minimisation algorithm that finds the optimal solution by following the gradient of a function. 
+In this particular case of machine learning the properties of the loss function are studied.
 In each step the algorithm adjust the weights by taking into account the gradient of the loss function calculated with respect to the model's weights.
 Let us denote $\theta = w_{i}$ and change the domain to time so that $\theta_{t}$ is the vector representing weights of the neural network at the time-step $t$.
-Then we can express gradient descent as follows:
+Then the express gradient descent can be expressed as follows:
 
 \begin{align}
 & J = loss(f(x), y) \\
 & \theta_{t+1} = \theta_{t} - \alpha \nabla_{\theta_{t}}J
 \end{align}
 
-In the term $\sum_{i} w_{i}x_{i} + b$ we can ``hide'' the $b$ variable by assuming additional element in input vector $x_{n+1} = 1$ and then $b=w_{n+1}x_{n+1}$.
-Also assuming MSE as the loss function, and using chain rule we can write that the derivative of loss in respect to network parameters $\nabla_{\theta_{t}}J$ in the following way:
+Also assuming MSE as the loss function, and using the chain rule the derivative of loss in respect to network parameters $\nabla_{\theta_{t}}J$ can be written in the following way:
 
 \begin{align}
 & \frac{\delta J}{\delta \theta_{t}} = \frac{\delta J}{\delta f }\frac{\delta f}{\delta \theta_{t}} \\
@@ -160,7 +160,7 @@ Also assuming MSE as the loss function, and using chain rule we can write that t
 & \frac{\delta J}{\delta \theta_{t}} = (f(x)-y)*x 
 \end{align}
 
-The same can be done for the network with an arbitrary number of layers. Given a two layered network, with arbitrary activation function $\sigma$:
+The same can be done for the network with an arbitrary number of layers. Given a two layered network, with arbitrary activation function $\sigma$\footnote{For convenience the term $\sum_{i} w_{i}x_{i} + b$  can be ``hidden'' the $b$ variable by assuming additional element in input vector $x_{n+1} = 1$ and then $b=w_{n+1}x_{n+1}$.}:
 
 \begin{align}
 & a^{[1]} = w^{[1]}x + b^{[1]}\\
@@ -169,14 +169,14 @@ The same can be done for the network with an arbitrary number of layers. Given a
 & J = \frac{1}{2} (a^{[2]} - y)^{2}
 \end{align}
 
-We can calculate the gradient descent for two layers of the network:
+The gradient descent for two layers of the network can be calculated as:
 
 \begin{align}
   & \theta^{[1]}_{t+1} = \theta^{[1]}_{t} - \alpha \nabla_{\theta^{[1]}_{t}}J\\
 & \theta^{[2]}_{t+1} = \theta^{[2]}_{t} - \alpha \nabla_{\theta^{[2]}_{t}}J 
 \end{align}
 
-Then we can write the gradients as: $\nabla_{\theta^{2}_{t}}J = \frac{\partial J}{\partial w^{[2]}} $ and $\nabla_{\theta^{1}_{t}}J = \frac{\partial J}{\partial w^{[1]}}$. In fact the chain rule is at it's core the backpropagation method. We follow the chain rule to calculate the gradient for the first layer $\theta^{1}_{t}$.
+The gradients can be written as as: $\nabla_{\theta^{2}_{t}}J = \frac{\partial J}{\partial w^{[2]}} $ and $\nabla_{\theta^{1}_{t}}J = \frac{\partial J}{\partial w^{[1]}}$. In fact the chain rule is at it's core the backpropagation method. The chain rule is then followed to calculate the gradient for the first layer $\theta^{1}_{t}$.
 
 \begin{align}
 &  \nabla_{\theta^{1}_{t}}J = \frac{\partial J}{\partial w^{[1]}} \\
@@ -187,7 +187,7 @@ Then we can write the gradients as: $\nabla_{\theta^{2}_{t}}J = \frac{\partial J
 % http://cs229.stanford.edu/notes2021fall/deep_learning_notes.pdf
 % https://towardsdatascience.com/gradient-descent-show-me-the-math-7ba7d1caef09
 
-Then using the equations above, we can rewrite the gradient of $\theta^{1}_{t}$.
+Then using the equations above, the gradient of $\theta^{1}_{t}$ can be rewritten.
 
 
 \begin{align}
@@ -456,7 +456,7 @@ The encoder tries to compress the information to a smaller dimension (also calle
 
 \section{Recurrent networks}
 
-Modelling of the ordered data sets is a very popular task and employs a special type of deep artificial neural networks. For instance we would like to preserve a temporal information for the modelled series of data points, where the next element may be influenced by the previous ones.
+Modelling of the ordered data sets is a very popular task and employs a special type of deep artificial neural networks. For instance, the temporal information can be preserved for the modelled series of data points, where the next element may be influenced by the previous ones.
 Such a goal can be achieved by using recurrent connections in neural networks.
 The recurrent connection can be understood as a loop in a neural network graph.
 
@@ -465,7 +465,7 @@ The recurrent connection can be understood as a loop in a neural network graph.
 % https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks
 % https://colah.github.io/posts/2015-08-Understanding-LSTMs/
 
-Generally we can describe the output from a simple recurrent neural network as follows:
+Generally, one can describe the output from a simple recurrent neural network as follows:
 \begin{equation}
 h_t = \sigma_h(W_{h} x_t + U_{h} h_{t-1} + b_h)
 \end{equation}
@@ -491,7 +491,7 @@ Recurrent neural networks can be divided into categories based on the input, out
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/chapter3/rnn_placeholder.png}
+  \includegraphics[width=0.9\linewidth]{figures/chapter3/RCNN2.jpg}
   \caption[recu]{Different recurrent neural networks, unrolled in time. The first example at the top is just a regular neural network. The second row represents a neural network which uses a single output and continuously produces output as many times as desired. The third row represents an inverted example when the network accumulates several different time step inputs and has a single output. This method can be helpful in sentiment analysis when a singular output marking sentiment is desired after a sequence of words.
   The fourth example depicts a RNN, which continuously produces output for each timestep. The last row shows that the number of inputs and outputs can be changed according to particular requirements\footnotemark. }
   \label{fig:recurrent_div}
@@ -544,13 +544,14 @@ The LSTM's inner workings can be explained intuitively. The $c_{t}$ vector can b
 \begin{figure}
   \centering
   \includegraphics[width=0.5\linewidth]{figures/chapter3/325px-Weibull_PDF.svg.png}
-  \caption[wei]{Weibull distribution with examplary paremeters\footnotemark. }
-  \label{fig:weibull}
-  \footnotetext{Source: \url{https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks}}
+
+  \caption[wei2]{Weibull distribution with examplary paremeters\footnotemark.
+  }
+ \label{fig:weibull}
 
 \end{figure}
 
-Another enhancement to the RNN models can be achieved by coupling them with the Weibull distribution. In that way we can create a model that can be able to predict a specific event (for instance time of the next aircraft engine checkup).
+Another enhancement to the RNN models can be achieved by coupling them with the Weibull distribution. In that way a model that can be able to predict a specific event (for instance time of the next aircraft engine checkup) can be created .
 The Weibull distribution (Fig. \ref{fig:weibull}) is defined by the following equation:
 \begin{equation}
 f(x;\lambda,k) =
@@ -581,8 +582,9 @@ And the custom activation function:
     activation(x_{i}) = e^{x_{0}} + Softplus(x_{1})
     \label{math:acti}
 \end{equation}
-
+\footnotetext{Source: \url{https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks} }
 \section{Deep Reinforcement learning}
+\label{sec:deep_rl}
 
 Many of the tasks in the real world do not have easy to define metrics and cannot follow input - output model of learning.
 In some areas, a reward response is more straightforward to define than the exact desired output.
@@ -625,7 +627,7 @@ $\pi(a|s)$ is a probabilistic mapping from $S$ to $A$. The goal of MDP is to fin
 \subsection{Q-Learning}
 
 As stated before, reinforcement learning is seeking to maximise the cumulative reward.
-We can define this cumulative reward as return $G_{t}$, as a sum of the rewards in the ongoing time-steps \cite{Sutton1998}:
+This cumulative reward can be defined as return $G_{t}$, as a sum of the rewards in the ongoing time-steps \cite{Sutton1998}:
 \begin{align}
   G_{t} = R_{t+1} +  \gamma R_{t+2} + \gamma^{2} R_{t+2} + \ldots =   \sum_{t=0}^{\infty} r_{t}\gamma^{t}
 \end{align}
@@ -643,19 +645,19 @@ This means the algorithm uses a state-value function $V(s)$, as defined in \ref{
 
 In plain words: value is the sum of all possible future discounted ($\gamma$) rewards ($r$).
 The value can also be applied to an action, as after applying an action, the new state and its reward are given.
-Assuming a policy $\pi$, we can also define a value of state s under the policy:
+Assuming a policy $\pi$, state s is defined under the policy:
 
 \begin{align}
   V_{\pi}(s) = \mathbb{E}_{\pi} \left[  G_{t} \bigg| s_{t} \right]=\mathbb{E}_{\pi} \left[  \sum_{t=0}^{\infty} r_{t}\gamma^{t} | s_{t} \right]
   \label{eq:valuepolicy}
 \end{align}
 
-We can also define a q-function $Q_{\pi}$, which given a state and action identifies the value.
+A q-function $Q_{\pi}$ can be dfined, which given a state and action identifies the value.
 \begin{align}
   Q_{\pi}(s,a) = \mathbb{E}_{\pi} \left[  G_{t} \bigg| s_{t}, a_{t} \right]
   \end{align}
 
-We can extend Eq. \ref{eq:valuepolicy} to the recurrent form, as the value function is dependant on future value functions.
+Eq. \ref{eq:valuepolicy} can be extended to the recurrent form, as the value function is dependant on future value functions.
 \begin{align}
 V_{\pi}(s) = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)\left[r+ \gamma v_{\pi}(s')\right]
 \label{eq:belman1}
@@ -663,7 +665,7 @@ V_{\pi}(s) = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)\left[r+ \gamma v_{\pi}(s')\r
 
 Eq. \ref{eq:belman1} is called Bellman equation and represents the connection between the current value and future value.
 
-For both state-value and action-value functions we can define optimal functions:
+For both state-value and action-value functions optimal functions can be defined:
 
 \begin{align}
 v_{*}(s) = \max_{\pi}v_{\pi}(s)
@@ -692,7 +694,7 @@ This table can be iteratively filled by choosing the actions using the policy de
 The last equation above is the key equation to the q-learning algorithm.
 This table can approximate the optimal solution to the given reinforcement learning problem.
 You can notice that the $Q$ should contain all of the different state-action pairs, which for many problems is not practical.
-This is where the Q-learning turns to the neural network's algorithms, as instead of using the $Q$ table, we can approximate $Q$ using a neural network.
+This is where the Q-learning turns to the neural network's algorithms, as instead of using the $Q$ table, $Q$ can be approximated using a neural network.
 
 
 %https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf
@@ -720,19 +722,19 @@ The basic idea of Q-learning is to update the Q function/table iteratively with 
 As stated previously, this may not be practical and lacks generalisation.
 Instead, a parameterised function an approximate one may be used $Q(s,a;\theta) \approx Q^{*}(s,a)$.
 This $Q$ function approximator can be a neural network parameterised by weights $\theta$.
-Next, we can build a loss function $L_{i}(\theta_{i})$
+Next, a loss function $L_{i}(\theta_{i})$ can be built
 \begin{align}
 L_{i}(\theta_{i}) = \mathbb{E}_{s,a~p(\dot)}\left[(y_{i} - Q(s,a;\theta))\right]
 \end{align}
 
 where $y_{i} = \mathbb{E}_{s'~\epsilon}\left[r+\gamma \max_{a'}Q(s',a';\theta_{i-1})\right]$
 
-Assuming MSE as our loss metric, we can write down loss function as follows:
+Assuming MSE as our loss metric, the loss function can be written as follows:
 \begin{align}
 \mathcal{L} = (Q(s,a,\theta) - (r+\gamma\max_{a'}Q(s',a';\theta_{i-1d})))^{2}
 \end{align}
 
-This, in practice, creates a particular problem, as we need to process the states and the actions in the neural network Q twice, once to get the output that will be compared with the prediction and once to calculate future prediction. This creates a loop that can lead to the network's instability, as it will be chasing a target that is constantly changing. This is why usually, in practice, there are two separate networks. One for calculation of the (main network) $Q(s,a)$ and other for $Q(s',a')$ (usually called target network). Then, the target network is not trained but updated periodically with the weights from the main network.
+This, in practice, creates a particular problem, as there is a need to process the states and the actions in the neural network Q twice, once to get the output that will be compared with the prediction and once to calculate future prediction. This creates a loop that can lead to the network's instability, as it will be chasing a target that is constantly changing. This is why usually, in practice, there are two separate networks. One for calculation of the (main network) $Q(s,a)$ and other for $Q(s',a')$ (usually called target network). Then, the target network is not trained but updated periodically with the weights from the main network.
 
 \subsection{Experience replay buffer}
 
@@ -749,7 +751,7 @@ Then such a list is randomly sampled for the training cases.
 \subsection{Double Deep Q-Learning}
 
 One of the problems of the DQN algorithms is over-optimistic value estimates.
-This is because when selecting the maximal value in the $\max_{a} Q(S_{t+1},a; \theta_{t})$ term we use one network pass to both choose (selecting the action of the max value), and calculate it's value (by returning only the maximum).
+This is because when selecting the maximal value in the $\max_{a} Q(S_{t+1},a; \theta_{t})$ term one network pass is used to both choose (selecting the action of the max value), and calculate it's value (by returning only the maximum).
 The double DQN algorithm \cite{https://doi.org/10.48550/arxiv.1509.06461} aspires to solve this problem by using an additional step of the network (eq. \ref{eq:doubleQlearning}).
 This step wraps the $\max_{a} Q(S_{t+1},a; \theta_{t})$ into additional Q function.
 
@@ -801,9 +803,9 @@ Now, at it's core, all Bayesian methods use simple, yet powerful Bayes theorem:
 \end{align}
 
 $P(\theta|D)$ is called posterior, $P(D|\theta)$ is the likelihood, $P(\theta)$ is the prior, and $P(D)$ is the evidence.
-In the case of machine learning tasks, we have data to test our beliefs, and so in this case, in order to find the approximation of $f(d_{i})$, we would like to find the probability distribution of $\theta$ under the condition of existing data $D$.
+In the case of machine learning tasks, there is data to test our beliefs, and so in this case, in order to find the approximation of $f(d_{i})$, the probability distribution of $\theta$ must be found, under the condition of existing data $D$.
 
-For this purpose we can say that the following approximation is true:
+For this purpose it can be stated that the following approximation is true:
 \begin{align}
 f(d_{i} | \theta) \approx P(D|\theta)
   \end{align}
@@ -811,8 +813,8 @@ f(d_{i} | \theta) \approx P(D|\theta)
 The Metropolis-Hastings method uses a transition model $Q(\theta'|\theta)$ to generate candidates for the searched parameter $\theta$.
 In this algorithm, $Q$ is used for creating random steps $\theta$ in the distribution space.
 For example $Q$ can be defined as $Q(\theta'|\theta)=N(\theta, \mu)$ and $\mu=1$. Such definition is in essence a random walk algorithm.
-With each step, we assess if the new position $\theta'$ is more likely to fit the distribution.
-If it is not, we discard the newly generated position and sample again.
+With each step, it is assessed if the new position $\theta'$ is more likely to fit the distribution.
+If it is not, the newly generated position is discarded and a new sample is created.
 Each step is directly influenced only by the previous step, which means it satisfies the Markov chain rule.
 The test of the likelihood of the step more likely belonging to distribution can be described as a ratio:
 
@@ -837,10 +839,10 @@ Then the acceptance probability can be explained as:
       \label{eq:acceptance}
 \end{align}
 
-The eq. \ref{eq:acceptance} means that we will accept new $\theta^{\prime}$ if the ratio $R$ is greater than $1$, but otherwise, we will accept it with probability $R$.
+The eq. \ref{eq:acceptance} means that the new $\theta^{\prime}$ will beaccepted if the ratio $R$ is greater than $1$, but otherwise, it will be accepted with probability $R$.
 
 The steps of the Metropolis-Hastings algorithm can be described as the pseudo-code in Listing \ref{alg:metropolis}.
-The first step is to generate random $\theta$. Then, we generate $\theta\prime$, and calculate the probability of belonging to the distribution for $\theta$ and $\theta\prime$. Then we use the acceptance rule to either accept or reject $\theta\prime$ as new $\theta$. Those steps are repeated $k$ times.
+The first step is to generate random $\theta$. Then, $\theta\prime$ is generated, the probability of belonging to the distribution for $\theta$ and $\theta\prime$ is calculated. Then the acceptance rule is used to either accept or reject $\theta\prime$ as new $\theta$. Those steps are repeated $k$ times.
 
 The process described in the listing \ref{alg:metropolis} creates a ``trace'' of candidate $\theta$ parameters, as visualised in Figure \ref{fig:random_walk}.
 
@@ -883,7 +885,7 @@ The process described in the listing \ref{alg:metropolis} creates a ``trace'' of
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{figures/chapter3/random_walk.png}
+  \includegraphics[width=0.8\linewidth]{figures/chapter3/random_walk.pdf}
   \caption{ Exemplary steps of Metropolis-Hastings steps. In this example, the target distribution is $\mathcal{N}(\mu=0, \sigma=3)$. The accepted values are in blue, and the red crosses are rejects.}
   % source: assets/random_walk
   \label{fig:random_walk}
@@ -897,7 +899,7 @@ The simple version of the Metropolis-Hastings algorithm assumes that the propose
 Depending on the type of the task, the variance $\mu$ of the sampled distribution can result in either too small or too big steps.
 An additional effort can be made to find a step size $\mu$ better suited for our particular case.
 It has been proven that one of the good indicators of a well-picked step $\mu$ is the acceptance rate of $23.4\%$ \cite{10.1214/aoap/1034625254}.
-We set a tuning parameter as several additional steps of the algorithm that will be used to find a proper $\mu$ for the rest of the run \cite{colin_carroll_2019}.
+A tuning parameter is set, as several additional steps of the algorithm that will be used to find a proper $\mu$ for the rest of the run \cite{colin_carroll_2019}.
 
 \subsection{Probabilistic programming and Bayesian modelling}
 
@@ -972,9 +974,9 @@ The steps of the algorithm can be described as follows:
 \end{center}
 
 The DBSCAN algorithm can be understood as density clustering.
-If for two points $p$ and $q$ the following is true: $p$ is a core point, and $q$ is a core point, and  $distance(p,q) < \epsilon$, then we say that those points are joined by density edge.
+If for two points $p$ and $q$ the following is true: $p$ is a core point, and $q$ is a core point, and  $distance(p,q) < \epsilon$, then those points are said to be joined by density edge.
 If for any two points $p$ and $q$ in the graph created by density edges there exists a path, then $p$ and $q$ are density connected.
-In this sense, we can say that any two points in a cluster are density connected.
+In this sense, it can be said that any two points in a cluster are density connected.
 
 \subsection{OPTICS}
 % https://scikit-learn.org/stable/modules/clustering.html#optics
@@ -1025,7 +1027,7 @@ $ordered\_points \gets $ ordered queue
 
 This process creates an ordered list of points where each neighbour of a point in the list is at a close distance from each other.
 However, it does not solve the problem of clustering.
-One of the more straightforward methods to do that is to use an epsilon cutoff - where we attribute those points that are below a certain threshold $\epsilon_{cut}$ to the noise and consider others to belong to clusters.
+One of the more straightforward methods to do that is to use an epsilon cutoff - where those points that are below a certain threshold $\epsilon_{cut}$ are attributed to the noise and others are considered to belong to a clusters.
 Another method called $\xi$-steepness is based on the steepness of the reachability plot.
 Results of both methods are presented in the Fig. \ref{fig:optics}.
 

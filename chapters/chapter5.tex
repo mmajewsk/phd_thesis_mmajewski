@@ -67,7 +67,7 @@ Users have multiple ways of interacting with Storck, but all of them internally 
 Users can use the web interface and manually input or download the data.
 For convenience, a python wrapper to the REST API also exists, so users can easily create scripts that will interact with Storck.
 When the webserver receives commands via REST API, it interacts with PostgresSQL to validate the request and responds using an HTTP request, either by providing the requested information (like a list of files, file details) or by sending the file.
-Because HTTP servers may be a bottleneck when serving large amounts of data, we implemented the possibility of downloading the data using direct files access.
+Because HTTP servers may be a bottleneck when serving large amounts of data, the possibility of downloading the data using direct files access is implemented.
 When storing files, Storck doesn't write them directly to the database, but it saves them to the disk.
 By the design of the CERN's computing ecosystem, this disk space is accessible by ssh connection with the CERN's lxplus servers.
 The Fig. \ref{fig:storck_diagram} contains a schematic diagram for the data flow in the Storck.
@@ -83,7 +83,7 @@ The Fig. \ref{fig:storck_diagram} contains a schematic diagram for the data flow
 \subsection{Implementation}
 
 The overall implementation spans over a few Django applications. I will not present parts of the code here, as I feel this would be excessive.
-Yet we provide an overview of the essential parts of the implementation of the service.
+Yet an overview of the essential parts of the implementation of the service is provided.
 
 \subsubsection{Files}
 
@@ -125,14 +125,14 @@ Here ``new version'' means a new file in a given workspace with the same \textit
 This property has no physical sense for the Storck database, as the files are not stored using this path.
 \textit{meta\_open} is the metadata property.
 It is JsonField, which makes it flexible, and allows to create an arbitrary structure of the data inside the field.
-Because we don't want to show older versions of files in the web view, we use flag \textit{hide} to decide whether the file is shown or not.
+If one does not want to show older versions of files in the web view, the flag \textit{hide} is used to decide whether the file is shown or not.
 
 
 \subsubsection{Authentication}
 The CERN account system allows for OAuth 2.0 \cite{rfc6819} authorisation for third party services.
 Each person in CERN has a personal CERN account that identifies the user.
 It uses an (OIDC) OpenID Connect system built on top of the OAuth 2.0 framework.
-That means that instead of requiring a proprietary login password in Storck, we can redirect the login to CERN SSO (CERN single sign-on) service.
+That means that instead of requiring a proprietary login password in Storck, the users can be redirected to login to CERN SSO (CERN single sign-on) service.
 There, user can use their CERN Account password and log in, the same that is being used for other services at CERN to log in.
 Automatically, in the background, CERN SSO communicates to the web server and confirms the user's identity.
 Setting up the authentication with OIDC requires setting proper tokens on the administrator side. Those can be generated using the CERN application portal.
@@ -294,7 +294,7 @@ print(client.get_files())
 
 The Storck client constructor accepts three arguments: the HTTP address to the Storck server, user token, and workspace token.
 These arguments are optional as, instead the environmental variables can be set, in order to not provide the tokens in plain text.
-The client has several methods, which we present in the form of a table (\ref{tab:storck_client}).
+The client has several methods, which is presented in the form of a table (\ref{tab:storck_client}).
 For a more detailed description of all of the methods, we refer the reader to the Storck documentation page\cite{storckdock}.
 
 
@@ -353,7 +353,7 @@ Inspired by Django's concept of implementing MVC in the framework, we define thr
 Those are fundamental blocks of any monitoring tasks.
 
 
-\textbf{Data} here is understood in terms of the source of data. Anytime we want to show some data, we need to access them.
+\textbf{Data} here is understood in terms of the source of data. Anytime one wants to show some data, one needs to access them.
 There are many ways that this can be done; reading files from a disk, reading a stream of data, receiving data as an HTTP request and others.
 This also means a format of the data. Data can be text files of CSV structure, binary files, images or sound recordings.
 
@@ -364,7 +364,7 @@ This also means a format of the data. Data can be text files of CSV structure, b
 
 \subsection{Using Titania}
 
-The detailed API can be found online \cite{titaniadoc}; nonetheless, we present here some of the examples of the classes used.
+The detailed API can be found online \cite{titaniadoc}; nonetheless, some of the examples of the classes used are presented here.
 Drawing inspiration from the Django framework, the Titania package contains a script that enables the creation of a Titania project.
 
 \mintinline{bash}{python -m titania start --name ProjectName}
@@ -503,7 +503,7 @@ It is connected using Qt signals to change the ``color'' property of the plot cl
 \subsubsection{Views}
 
 The View connects Data, Plotting and Exploration. Views should implement \textbf{TitaniaTabInterface}, with \textbf{get\_title()} and \textbf{initiate()} methods.
-Since we assume a tabular design of the interface, \textbf{get\_title()} should be returning the name displayed name of the tab.
+Since a tabular design of the interface is assumed, \textbf{get\_title()} should be returning the name displayed name of the tab.
 The \textbf{initate} method is used to start all of the things needed for the view to work.
 As it is a very basic requirement, many classes exist that already implement valuable features.
 The recommended class to use when making a tab for titania in Qt is \textbf{QtBaseLayoutTab}.
@@ -611,7 +611,7 @@ The class \textbf{WeatherDataCached} extends the class \textbf{WeatherData}, and
 The  \textbf{data} attribute stores the data coming from the parent \textbf{WeatherData.fetch()} method, and  \textbf{last\_check} contains the last time of the call of that method.
 When the time span of 5 minutes is exceeded, the data is refreshed. Otherwise, the data received with the last call of \textbf{WeatherData.fetch()} is returned.
 
-Now, to run a new upgraded version of the program, we need only one additional change seen in Listing \ref{listing:weather_change}.
+Now, to run a new upgraded version of the program, only one additional change is needed, as seen in Listing \ref{listing:weather_change}.
 
 \begin{listing}[!ht]
 \begin{minted}{python}
