@@ -15,6 +15,7 @@ jobs:
         with:
           root_file: dissertation.tex
           latexmk_use_xelatex: true
+          latexmk_shell_escape: true
       - name: check fail Logan
         if: always()
         run: cat dissertation.log
